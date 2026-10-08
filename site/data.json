@@ -1,8 +1,8 @@
 {
   "meta": {
     "status": "ready",
-    "generated_at": "2026-10-08T18:59:20.673771+00:00",
-    "generated_et": "2026-10-08T14:59:20.673771-04:00",
+    "generated_at": "2026-10-08T19:05:16.328295+00:00",
+    "generated_et": "2026-10-08T15:05:16.328295-04:00",
     "market_data_dates": [
       "2026-10-08",
       "2026-10-07"
@@ -2491,6 +2491,16 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
+      "title": "Baidu, Inc. (BIDU) Stock Price, News, Quote & History - Yahoo! Finance Canada",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9DZWhfaDk3czIteVJjbHp5LUQ0WkxFSkFnYWJyaHNSZ1R1ZzEyTlBrZUhuMnBkeWdPZ1FlbGZENEFRMUhEY3ZJMmdZMEtNWkRtOVE?oc=5",
+      "published_at": "2026-10-08T14:16:49+00:00",
+      "publisher": "Yahoo! Finance Canada",
+      "category": "中概",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
       "title": "Sharp rise in crude oil prices weighs on Wall Street - Scranton Times-Tribune",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOejVkTTR6YXRtRUxHekZ3cUFwSE1PMHB3eUdVLU1iMzVRb0dDb0VObnVCOXFpVUFNOUJ2OHdndVhzbVplWVktMEFkX3g4aExCeUhMbzdRMXh1dVpWNWRpRVlYMmJ3c2toSzBlYWprVk5UTXNpeVFNVHB5T0JNZkl1Yw?oc=5",
       "published_at": "2026-10-08T13:52:17+00:00",
@@ -2574,16 +2584,6 @@
       "title": "XPeng Inc. (XPEV) Stock Price, News, Quote & History - Yahoo! Finance Canada",
       "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBJZmUzRUFURVJzNkhmdlF4STN3RHRzbUg3ZnFILWtrdzNyRTFrVGd1THVEa0xNLUZtUEphM213Sm8xb3lWUTJtWnQ3N3dtVnM1TWc?oc=5",
       "published_at": "2026-10-08T08:04:22+00:00",
-      "publisher": "Yahoo! Finance Canada",
-      "category": "中概",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Baidu, Inc. (BIDU) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9DZWhfaDk3czIteVJjbHp5LUQ0WkxFSkFnYWJyaHNSZ1R1ZzEyTlBrZUhuMnBkeWdPZ1FlbGZENEFRMUhEY3ZJMmdZMEtNWkRtOVE?oc=5",
-      "published_at": "2026-10-08T06:22:34+00:00",
       "publisher": "Yahoo! Finance Canada",
       "category": "中概",
       "potentially_material": false,
