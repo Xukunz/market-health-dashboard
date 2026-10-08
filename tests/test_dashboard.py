@@ -1,6 +1,7 @@
 """Deterministic scoring tests with artificial INPUTS, not published market prices."""
 import importlib.util
 import unittest
+from unittest import mock
 from pathlib import Path
 
 path = Path(__file__).resolve().parents[1] / 'scripts' / 'update_data.py'
@@ -83,6 +84,60 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(s['date'],'2026-10-08')
         self.assertEqual(s['currency'],'HKD')
         self.assertEqual(s['change_1d'],10.0)
+
+class MacroLoaderTests(unittest.TestCase):
+    """FRED 会屏蔽部分 CI 出口 IP，缺失时必须回退取数而不是整段留空。"""
+
+    def observation(self, key='vix', source='Yahoo Finance · ^VIX (fallback)'):
+        return {'key': key, 'name': key, 'unit': '', 'value': 21.5,
+                'date': m.NOW.astimezone(m.ET).date().isoformat(),
+                'change_5obs': 1.0, 'change_5obs_pct': 4.9,
+                'source': source, 'url': 'https://finance.yahoo.com/quote/%5EVIX'}
+
+    def test_yahoo_macro_maps_daily_close_to_observation(self):
+        daily = {'symbol': '^VIX', 'price': 21.5, 'date': '2026-10-07', 'change_5d': 4.2,
+                 'sparkline': [18, 18.5, 19, 20, 20.5, 21.5]}
+        with mock.patch.object(m, 'yahoo_daily', lambda symbol: daily):
+            obs = m.yahoo_macro('vix', '^VIX', 'VIX波动率指数', '')
+        self.assertEqual(obs['value'], 21.5)
+        self.assertEqual(obs['date'], '2026-10-07')
+        self.assertEqual(obs['change_5obs_pct'], 4.2)
+        self.assertAlmostEqual(obs['change_5obs'], 3.5, places=3)
+        self.assertIn('^VIX', obs['source'])
+        self.assertIn('yahoo', obs['url'].lower())
+
+    def test_fred_failure_falls_back_to_yahoo(self):
+        seen = []
+        def fred_fail(*a, **k):
+            raise m.requests.ConnectionError('fred blocked')
+        def yahoo_ok(key, symbol, label, unit):
+            seen.append(key)
+            return self.observation(key)
+        with mock.patch.object(m, 'fred_series', fred_fail), mock.patch.object(m, 'yahoo_macro', yahoo_ok, create=True):
+            out = m.load_fred()
+        self.assertEqual(sorted(out), ['brent', 'treasury_10y', 'treasury_30y', 'vix'])
+        self.assertEqual(out['vix']['value'], 21.5)
+        self.assertEqual(sorted(seen), ['brent', 'treasury_10y', 'treasury_30y', 'vix'])
+
+    def test_fred_success_skips_yahoo_fallback(self):
+        def fred_ok(key, series_id, label, unit):
+            return self.observation(key, source=f'FRED · {series_id}')
+        def yahoo_boom(*a, **k):
+            raise AssertionError('FRED 正常时不应调用 Yahoo 兜底')
+        with mock.patch.object(m, 'fred_series', fred_ok), mock.patch.object(m, 'yahoo_macro', yahoo_boom, create=True):
+            out = m.load_fred()
+        self.assertEqual(len(out), len(m.FRED))
+        self.assertIn('high_yield_spread', out)
+
+    def test_series_without_yahoo_equivalent_is_dropped(self):
+        def fred_fail(*a, **k):
+            raise m.requests.ConnectionError('fred blocked')
+        def yahoo_ok(key, symbol, label, unit):
+            return self.observation(key)
+        with mock.patch.object(m, 'fred_series', fred_fail), mock.patch.object(m, 'yahoo_macro', yahoo_ok, create=True):
+            out = m.load_fred()
+        self.assertNotIn('high_yield_spread', out)
+
 
 if __name__=='__main__':
     unittest.main()

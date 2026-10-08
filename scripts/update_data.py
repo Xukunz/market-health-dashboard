@@ -55,6 +55,12 @@ BENCHMARKS = [("SPY", "S&P 500 ETF"), ("QQQ", "Nasdaq 100 ETF"), ("SOXX", "半�
 SECTORS = ["XLC", "XLY", "XLP", "XLE", "XLF", "XLV", "XLI", "XLB", "XLK", "XLU", "XLRE"]
 CHIPS = ["NVDA", "ARM", "AMD", "INTC", "MU", "SNDK", "QCOM", "MRVL", "AMAT", "ASML", "LRCX", "KLAC", "SKHY", "WDC", "STX"]
 FRED = {"treasury_10y": ("DGS10", "美国10年期国债收益率", "%"), "treasury_30y": ("DGS30", "美国30年期国债收益率", "%"), "vix": ("VIXCLS", "VIX波动率指数", ""), "brent": ("DCOILBRENTEU", "Brent现货原油", "USD/桶"), "high_yield_spread": ("BAMLH0A0HYM2", "美国高收益债信用利差", "%")}
+# FRED 会屏蔽部分数据中心/CI 出口 IP（GitHub Actions 上表现为读超时）。
+# 这些序列用 Yahoo Finance 的同类日线标的兜底，页面会显示真实来源；没有同类标的的序列仍留空。
+YAHOO_MACRO = {"treasury_10y": ("^TNX", "10Y 美债收益率（^TNX）"),
+               "treasury_30y": ("^TYX", "30Y 美债收益率（^TYX）"),
+               "vix": ("^VIX", "VIX 波动率（^VIX）"),
+               "brent": ("BZ=F", "Brent 原油期货（BZ=F 近月）")}
 NEWS_QUERIES = [
     ("科技", 'Nvidia OR Microsoft OR Google OR Apple OR Amazon stocks'),
     ("半导体", 'semiconductor OR SK hynix OR Micron OR AMD OR ASML earnings'),
@@ -239,17 +245,45 @@ def fred_series(name, series_id, label, unit):
             "url": f"https://fred.stlouisfed.org/series/{series_id}"}
 
 
+def yahoo_macro(key, symbol, label, unit):
+    """兜底宏观序列：取 Yahoo 同类日线收盘，来源与 URL 会如实标注，不冒充 FRED 观测值。"""
+    daily = yahoo_daily(symbol)
+    spark = daily.get("sparkline") or []
+    price = daily["price"]
+    prior5 = spark[-6] if len(spark) >= 6 else None
+    return {"key": key, "name": label, "unit": unit, "value": rounded(price, 3), "date": daily["date"],
+            "change_5obs": rounded(price - prior5, 3) if prior5 is not None else None,
+            "change_5obs_pct": daily.get("change_5d"),
+            "source": f"Yahoo Finance · {symbol}（FRED 不可用时的兜底）",
+            "url": f"https://finance.yahoo.com/quote/{quote(symbol)}"}
+
+
+def yahoo_macro_fallback(key, label, unit):
+    target = YAHOO_MACRO.get(key)
+    if not target:
+        return None
+    try:
+        return yahoo_macro(key, *target, unit)
+    except Exception as e:
+        LOG.warning("Yahoo macro fallback %s: %s", key, str(e)[:150])
+        return None
+
+
 def load_fred():
     output = {}
     for key, (series_id, label, unit) in FRED.items():
+        observation = None
         try:
             observation = fred_series(key, series_id, label, unit)
-            if age_in_market_days(observation["date"]) > 12:
-                LOG.warning("Ignoring stale macro %s observation %s", series_id, observation["date"])
-            else:
-                output[key] = observation
         except Exception as e:
             LOG.warning("FRED %s: %s", series_id, str(e)[:150])
+            observation = yahoo_macro_fallback(key, label, unit)
+        if observation is None:
+            continue
+        if age_in_market_days(observation["date"]) > 12:
+            LOG.warning("Ignoring stale macro %s observation %s", series_id, observation["date"])
+        else:
+            output[key] = observation
     return output
 
 
@@ -282,16 +316,17 @@ def build_health(stocks, indices, macro):
     if vix:
         s = band_score(vix["value"], [(14,20),(18,16),(22,12),(28,8),(35,4),(float('inf'),0)])
         parts.append({"key":"volatility", "name":"波动环境", "score":s, "max":20,
-                      "reason": f"VIX {vix['value']}（{vix['date']}）", "coverage":"FRED VIXCLS"})
+                      "reason": f"VIX {vix['value']}（{vix['date']}）", "coverage": vix.get("source", "FRED VIXCLS")})
     if ten and brent and brent["change_5obs_pct"] is not None:
         s1 = band_score(ten["value"],[(3.5,10),(4.25,8),(5,5),(5.5,2),(float('inf'),0)])
         s2 = band_score(brent["change_5obs_pct"],[(-5,10),(2,8),(6,5),(12,2),(float('inf'),0)])
         parts.append({"key":"macro", "name":"利率与能源", "score":s1+s2, "max":20,
-                      "reason": f"10Y {ten['value']}% · Brent近5个观测值变化 {brent['change_5obs_pct']:+.1f}%", "coverage":"FRED DGS10 + DCOILBRENTEU"})
+                      "reason": f"10Y {ten['value']}% · Brent近5个观测值变化 {brent['change_5obs_pct']:+.1f}%",
+                      "coverage": f"{ten.get('source','FRED DGS10')} + {brent.get('source','FRED DCOILBRENTEU')}"})
     if spread:
         s = band_score(spread["value"], [(3,15),(4,12),(5,8),(6.5,4),(float('inf'),0)])
         parts.append({"key":"credit", "name":"信用压力", "score":s, "max":15,
-                      "reason": f"美国高收益债OAS {spread['value']}%", "coverage":"FRED BAMLH0A0HYM2"})
+                      "reason": f"美国高收益债OAS {spread['value']}%", "coverage": spread.get("source", "FRED BAMLH0A0HYM2")})
     base = sum(p["max"] for p in parts)
     result = {"score": round(100*sum(p["score"] for p in parts)/base) if base >= 60 else None,
               "observed_points": sum(p["score"] for p in parts), "coverage":base,
@@ -416,7 +451,7 @@ def main():
     data = {"meta":{"status":"ready" if stocks else "unavailable", "generated_at":NOW.isoformat(),
                     "generated_et":NOW.astimezone(ET).isoformat(),
                     "market_data_dates":age,"market_data_source":"Yahoo Finance unofficial daily historical chart; Stooq fallback",
-                    "macro_source":"Federal Reserve FRED public CSV", "news_source":"Google News RSS (unverified headlines)",
+                    "macro_source":"Federal Reserve FRED public CSV（限流时回退 Yahoo Finance 同类标的，页面标注实际来源）", "news_source":"Google News RSS (unverified headlines)",
                     "refresh":"每日北京时间/美东时间晚间，通过GitHub Actions计划运行；不提供实时逐笔行情",
                     "quote_count":len(stocks),"watchlist_size":len(WATCHLIST),
                     "errors":"部分数据源可能限流，缺失则留空，不会使用旧截图填充。"},

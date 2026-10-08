@@ -10,7 +10,7 @@
 - **半导体压力评分（0–100）**：SOXX趋势、SOXX相对SPY强弱、15只相关股票的广度及20日高点回撤。它是**样本评分**，不能视作半导体行业官方指数。
 - **主要市场**：SPY、QQQ、SOXX、RSP、IWM、HYG、TLT，日变动及25交易日走势。
 - **38只自选股**：筛选、排序、搜索，日/5日涨跌幅、量比、25日走势。按原始市场源记录交易日期。港股以HKD计价。
-- **宏观数据**：FRED的DGS10、DGS30、VIXCLS、DCOILBRENTEU、BAMLH0A0HYM2。不同数据发布日可能不同。
+- **宏观数据**：FRED的DGS10、DGS30、VIXCLS、DCOILBRENTEU、BAMLH0A0HYM2。不同数据发布日可能不同。FRED 屏蔽部分数据中心/CI 出口 IP（GitHub Actions 上表现为读超时），此时自动回退到 Yahoo Finance 的同类标的（^TNX、^TYX、^VIX、BZ=F），页面如实标注实际来源；高收益债利差没有同类标的，仍留空。
 - **异动**：当日涨跌超过5%、5交易日超过10%、量比达到2倍自动标记。量比对比前20个完整交易日，不能严格证明异常成交量。
 - **新闻**：Google News RSS抓取原始标题、发布时间和跳转链接，仅以关键词标记潜在重大新闻，**不等同于真实性核验或事实确认**。
 - **本机持仓**：可手动填写股数与成本，保存在浏览器 `localStorage`，不会写入 `data.json` 或公开GitHub仓库。
@@ -73,7 +73,7 @@ cd site && python -m http.server 8080
 | 数据 | 来源 | 备注 |
 |---|---|---|
 | 股票及ETF日线 | Yahoo Finance公开图表接口；失败时尝试Stooq | **非官方/非保证服务**；可能限流，非逐笔实时；复权方式可能不同 |
-| 美债、油价、VIX、信用利差 | Federal Reserve FRED 公开CSV | FRED观测时间不一致，可能滞后1–2个工作日或更久 |
+| 美债、油价、VIX、信用利差 | Federal Reserve FRED 公开CSV；不可用时回退 Yahoo Finance 同类标的（^TNX/^TYX/^VIX/BZ=F） | FRED观测时间不一致，可能滞后1–2个工作日或更久；回退标的是指数/期货，与FRED原序列不完全等同 |
 | 新闻 | Google News RSS | 不等于 Reuters 等原始报道已经核实；标题可能被改写或重复 |
 | 评分历史 | 仓库内 `site/history.json` | 记录工作流生成日，不一定对应交易日 |
 | 个人持仓 | 当前浏览器 `localStorage` | 浏览器清空数据、无痕模式或换设备会丢失；不自动同步IBKR |
