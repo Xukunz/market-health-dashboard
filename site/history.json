@@ -3,8 +3,9 @@
     {
       "date": "2026-10-08",
       "market": 69,
-      "semiconductors": 88,
-      "coverage": 85
+      "semiconductors": 72,
+      "coverage": 85,
+      "methodology_version": "1.1"
     }
   ]
 }
