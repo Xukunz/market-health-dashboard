@@ -8,6 +8,8 @@
   <title>市场脉搏 · MARKET PULSE</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="watchlist.css" />
+  <script src="watchlist.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -63,6 +65,7 @@
                 <div class="score-state" id="score-state">等待首次数据更新</div>
                 <p id="score-explainer">由5个可复核维度计算；缺失数据不会被假定为正常。</p>
                 <div class="score-coverage" id="score-coverage">数据覆盖率 —</div>
+                <div class="score-quality" id="score-quality">评分样本与来源审计将在每日更新后显示。</div>
               </div>
               <div class="gauge" aria-label="市场健康度仪表盘">
                 <svg viewBox="0 0 300 176" role="img" aria-label="市场评分仪表盘">
@@ -77,9 +80,9 @@
               </div>
             </div>
             <div class="hero-bottom">
-              <div><span class="meta-label">评估时间框架</span><strong>未来 1—4 周</strong></div>
+              <div><span class="meta-label">评估口径</span><strong>最近完成交易日</strong></div>
               <div><span class="meta-label">更新机制</span><strong>每日 EOD</strong></div>
-              <div><span class="meta-label">模型版本</span><strong>MP 1.0</strong></div>
+              <div><span class="meta-label">模型版本</span><strong id="model-version">MP 1.1</strong></div>
             </div>
           </article>
           <article class="semi card">
@@ -123,7 +126,7 @@
         </section>
 
         <section class="watch-section fade-up" id="watchlist">
-          <div class="section-header"><div><span class="section-index">03 / WATCHLIST</span><h2>股票 <span>雷达</span></h2></div><div class="watch-actions"><span id="stock-count-summary">38只追踪标的</span></div></div>
+          <div class="section-header"><div><span class="section-index">03 / WATCHLIST</span><h2>股票 <span>雷达</span></h2></div><div class="watch-actions"><span id="stock-count-summary">38只追踪标的</span><button class="outline-button" type="button" id="edit-watchlist">编辑自选股</button></div></div>
           <div class="watch-card card">
             <div class="watch-toolbar"><div class="tabs" role="group" aria-label="筛选股票"><button class="tab active" data-filter="all">全部标的</button><button class="tab" data-filter="alert">显著异动</button><button class="tab" data-filter="chip">半导体</button><button class="tab" data-filter="hk">中概 / 港股</button></div><div class="search-box"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.2 4.2"/></svg><input id="stock-search" aria-label="搜索股票" placeholder="搜索代码 / 名称" /></div></div>
             <div class="table-scroll"><table class="stock-table"><thead><tr><th><button data-sort="symbol">标的 ↕</button></th><th>板块</th><th class="num"><button data-sort="price">价格 ↕</button></th><th class="num"><button data-sort="change_1d">日涨跌 ↕</button></th><th class="num"><button data-sort="change_5d">5日变化 ↕</button></th><th class="num"><button data-sort="volume_multiple">量比 ↕</button></th><th class="chart-cell">近25日走势</th><th>状态</th></tr></thead><tbody id="stock-rows"></tbody></table></div>
@@ -155,6 +158,13 @@
       <div class="dialog-header"><div><div class="section-kicker">EOD TECHNICAL SNAPSHOT</div><h2 id="stock-detail-title">股票详情</h2><p id="stock-detail-subtitle">来源日期和关键区间</p></div><button class="dialog-close" type="button" id="close-stock" aria-label="关闭">×</button></div>
       <div id="stock-detail-content"></div>
     </div>
+  </dialog>
+  <dialog class="portfolio-dialog watchlist-dialog" id="watchlist-dialog" aria-labelledby="watchlist-title">
+    <div class="dialog-header"><div><div class="section-kicker">LOCAL WATCHLIST</div><h2 id="watchlist-title">编辑自选股</h2><p>列表仅保存在当前浏览器。评分使用独立固定样本，不受这里的增删影响。</p></div><button class="dialog-close" type="button" id="close-watchlist" aria-label="关闭">×</button></div>
+    <form id="watchlist-add-form" class="watchlist-add-form"><input id="watchlist-symbol" type="text" maxlength="12" autocomplete="off" aria-label="添加股票代码" placeholder="输入代码，例如 AAPL 或 0700.HK" /><button class="primary-button" type="submit">添加</button></form>
+    <p class="watchlist-note">可添加任意有效股票代码；每日静态数据尚未收录的代码会显示“无行情”，不会填入猜测价格。最多80只。</p>
+    <div id="watchlist-editor-rows" class="watchlist-editor-rows"></div>
+    <div class="dialog-footer"><button class="danger-text-button" id="restore-watchlist" type="button">恢复默认38只</button><div><button class="outline-button" id="cancel-watchlist" type="button">取消</button><button class="primary-button" id="save-watchlist" type="button">保存到本机</button></div></div>
   </dialog>
   <dialog class="portfolio-dialog" id="portfolio-dialog" aria-labelledby="portfolio-title"><form method="dialog" id="portfolio-form"><div class="dialog-header"><div><div class="section-kicker">LOCAL-ONLY PORTFOLIO</div><h2 id="portfolio-title">编辑持仓</h2><p>信息只存储在当前浏览器的 localStorage，公开网页访客不会看到你的数据。</p></div><button class="dialog-close" type="button" id="close-portfolio" aria-label="关闭">×</button></div>
     <div class="dialog-subhead"><span>股票代码</span><span>持仓股数</span><span>平均成本</span><span></span></div><div class="portfolio-inputs" id="portfolio-inputs"></div>

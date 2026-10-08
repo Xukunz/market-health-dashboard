@@ -51,6 +51,14 @@ WATCHLIST = [
     ("NIO", "NIO", "中概 / 港股"), ("0700.HK", "腾讯控股", "中概 / 港股"),
     ("SKHY", "SK hynix", "存储芯片"), ("AMC", "AMC", "高波动")
 ]
+# Scoring sample is intentionally independent of a visitor's displayed watchlist.
+# Keep it fixed for methodology 1.1 so scores remain comparable over time.
+SCORE_STOCKS = (
+    "AAPL", "AMZN", "TSLA", "MSFT", "META", "NVDA", "ARM", "AMD", "INTC",
+    "GOOG", "MU", "SNDK", "QCOM", "T", "VZ", "TMUS", "TTWO", "ORCL", "WDC",
+    "STX", "MRVL", "AMAT", "GEV", "ASML", "LRCX", "KLAC", "BRK.B", "BRK.A",
+    "BABA", "PDD", "BILI", "NTES", "LI", "NIO", "SKHY", "AMC",
+)
 BENCHMARKS = [("SPY", "S&P 500 ETF"), ("QQQ", "Nasdaq 100 ETF"), ("SOXX", "半导体 ETF"), ("RSP", "等权标普 ETF"), ("IWM", "小盘股 ETF"), ("HYG", "高收益债 ETF"), ("TLT", "长期美债 ETF")]
 SECTORS = ["XLC", "XLY", "XLP", "XLE", "XLF", "XLV", "XLI", "XLB", "XLK", "XLU", "XLRE"]
 CHIPS = ["NVDA", "ARM", "AMD", "INTC", "MU", "SNDK", "QCOM", "MRVL", "AMAT", "ASML", "LRCX", "KLAC", "SKHY", "WDC", "STX"]
@@ -294,14 +302,29 @@ def band_score(value, breaks):
     return breaks[-1][1]
 
 
+def observation_near_date(observation, reference_date, max_lag_days=5):
+    if not observation:
+        return False
+    if not reference_date:
+        return True
+    try:
+        lag = (date.fromisoformat(reference_date) - date.fromisoformat(observation["date"])).days
+    except (KeyError, TypeError, ValueError):
+        return False
+    return 0 <= lag <= max_lag_days
+
+
 def build_health(stocks, indices, macro):
     spy = indices.get("SPY")
-    sectors = [indices[s] for s in SECTORS if s in indices and indices[s]["sma50"]]
-    watch = [s for s in stocks.values() if s.get("sma50") and s.get("currency") == "USD"]
-    vix = macro.get("vix")
-    ten = macro.get("treasury_10y")
-    brent = macro.get("brent")
-    spread = macro.get("high_yield_spread")
+    reference_date = spy.get("date") if spy else None
+    def same_session(item):
+        return reference_date is None or item.get("date") == reference_date
+    sectors = [indices[s] for s in SECTORS if s in indices and indices[s].get("sma50") and same_session(indices[s])]
+    watch = [stocks[s] for s in SCORE_STOCKS if s in stocks and stocks[s].get("sma50") and stocks[s].get("currency") == "USD" and same_session(stocks[s])]
+    vix = macro.get("vix") if observation_near_date(macro.get("vix"), reference_date) else None
+    ten = macro.get("treasury_10y") if observation_near_date(macro.get("treasury_10y"), reference_date) else None
+    brent = macro.get("brent") if observation_near_date(macro.get("brent"), reference_date) else None
+    spread = macro.get("high_yield_spread") if observation_near_date(macro.get("high_yield_spread"), reference_date) else None
     parts = []
     if spy and all(spy.get("sma"+str(n)) is not None for n in [20, 50, 200]):
         score = sum(weight for n, weight in [(20, 8), (50, 8), (200, 9)] if spy["price"] >= spy["sma"+str(n)])
@@ -312,7 +335,7 @@ def build_health(stocks, indices, macro):
         p2 = sum(s["price"] >= s["sma50"] for s in watch) / len(watch)
         score = round(12*p1 + 8*p2)
         parts.append({"key":"breadth", "name":"上涨广度", "score": score, "max": 20,
-                      "reason": f"板块ETF站上50日线{round(100*p1)}% · 自选股样本站上50日线{round(100*p2)}%", "coverage": f"{len(sectors)}个行业ETF + {len(watch)}只美股"})
+                      "reason": f"板块ETF站上50日线{round(100*p1)}% · 固定股票样本站上50日线{round(100*p2)}%", "coverage": f"{len(sectors)}个行业ETF + {len(watch)}只美股"})
     if vix:
         s = band_score(vix["value"], [(14,20),(18,16),(22,12),(28,8),(35,4),(float('inf'),0)])
         parts.append({"key":"volatility", "name":"波动环境", "score":s, "max":20,
@@ -328,21 +351,31 @@ def build_health(stocks, indices, macro):
         parts.append({"key":"credit", "name":"信用压力", "score":s, "max":15,
                       "reason": f"美国高收益债OAS {spread['value']}%", "coverage": spread.get("source", "FRED BAMLH0A0HYM2")})
     base = sum(p["max"] for p in parts)
-    result = {"score": round(100*sum(p["score"] for p in parts)/base) if base >= 60 else None,
+    scored_macro = [item for item in (vix, spread) if item]
+    if ten and brent and brent["change_5obs_pct"] is not None:
+        scored_macro.extend((ten, brent))
+    macro_proxy_count = sum(item.get("source", "").startswith("Yahoo Finance") for item in scored_macro)
+    result = {"score": round(100*sum(p["score"] for p in parts)/base) if base >= 60 and reference_date else None,
               "observed_points": sum(p["score"] for p in parts), "coverage":base,
               "label":"观察池风险评分", "components":parts,
-              "disclaimer":"规则化风险状态指标，不是官方指数；缺失分项时按已获数据归一化，覆盖率低于60%则不出分。上涨广度是行业ETF和自选股样本，不代表全市场涨跌家数。"}
+              "data_quality":{"reference_date":reference_date, "sector_count":len(sectors),
+                              "sector_target":len(SECTORS), "stock_count":len(watch),
+                              "stock_target":len(SCORE_STOCKS), "macro_proxy_count":macro_proxy_count},
+              "disclaimer":"规则化风险状态指标，不是官方指数；缺失分项时按已获数据归一化，覆盖率低于60%或缺少SPY基准交易日则不出分。上涨广度使用固定行业ETF和股票样本，不代表全市场涨跌家数；用户自选列表不参与评分。"}
     return result
 
 
 def build_semi_health(stocks, indices):
     soxx, spy = indices.get("SOXX"), indices.get("SPY")
-    chips = [stocks[s] for s in CHIPS if s in stocks and stocks[s].get("sma50")]
+    reference_date = soxx.get("date") if soxx else None
+    chips = [stocks[s] for s in CHIPS if s in stocks and stocks[s].get("sma50")
+             and (reference_date is None or stocks[s].get("date") == reference_date)]
     if not soxx or not spy or len(chips) < 6 or not soxx.get("sma200"):
         return {"score":None,"coverage":0,"reason":"缺少SOXX、SPY或半导体样本数据"}
     trend = sum(weight for n, weight in [(20,12),(50,13),(200,15)] if soxx["price"] >= soxx["sma"+str(n)])
     rel = None
-    if soxx["change_5d"] is not None and spy["change_5d"] is not None:
+    if (soxx["change_5d"] is not None and spy["change_5d"] is not None
+            and (reference_date is None or spy.get("date") == reference_date)):
         diff = soxx["change_5d"] - spy["change_5d"]
         rel = band_score(-diff, [(-3,20),(0,15),(3,9),(7,4),(float('inf'),0)])
     breadth = round(25*sum(s["price"]>=s["sma50"] for s in chips)/len(chips))
@@ -412,7 +445,7 @@ def update_history(health, semi):
         except (ValueError, OSError):
             pass
     today = NOW.astimezone(ET).date().isoformat()
-    record = {"date":today,"market":health.get("score"),"semiconductors":semi.get("score"), "coverage":health.get("coverage",0)}
+    record = {"date":today,"market":health.get("score"),"semiconductors":semi.get("score"), "coverage":health.get("coverage",0), "methodology_version":"1.1"}
     previous = [v for v in previous if v.get("date") != today]
     if health.get("score") is not None or semi.get("score") is not None:
         previous.append(record)
@@ -420,11 +453,19 @@ def update_history(health, semi):
     HISTORY.write_text(json.dumps({"points":previous[-120:]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
 
+def quote_universe(display_watchlist):
+    return list(dict.fromkeys(
+        [symbol for symbol, _, _ in display_watchlist]
+        + list(SCORE_STOCKS) + CHIPS
+        + [symbol for symbol, _ in BENCHMARKS] + SECTORS
+    ))
+
+
 def main():
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     LOG.info("Starting daily snapshot %s", NOW.isoformat())
     mapping = {symbol:{"symbol":symbol,"name":name,"category":category} for symbol,name,category in WATCHLIST}
-    universe = list(mapping.keys())+[b[0] for b in BENCHMARKS]+SECTORS
+    universe = quote_universe(WATCHLIST)
     quotes = {}
     with ThreadPoolExecutor(max_workers=6) as pool:
         futures = {pool.submit(quote_one,(s,)):s for s in universe}
@@ -444,8 +485,9 @@ def main():
             stocks[sym] = q
     indices = {k:quotes[k] for k in [x[0] for x in BENCHMARKS]+SECTORS if k in quotes}
     macro = load_fred()
-    health = build_health(stocks, indices, macro)
-    semi = build_semi_health(stocks, indices)
+    score_stocks = {symbol:quotes[symbol] for symbol in set(SCORE_STOCKS) | set(CHIPS) if symbol in quotes}
+    health = build_health(score_stocks, indices, macro)
+    semi = build_semi_health(score_stocks, indices)
     news = fetch_news()
     age = sorted({s["date"] for s in stocks.values()},reverse=True)
     data = {"meta":{"status":"ready" if stocks else "unavailable", "generated_at":NOW.isoformat(),
@@ -463,11 +505,11 @@ def main():
             "notices":[{"symbol":s["symbol"],"name":s["name"],"price_date":s["date"],"alerts":s["alerts"],
                         "change_1d":s["change_1d"],"price":s["price"],"currency":s["currency"]}
                        for s in stocks.values() if s["alerts"]],
-            "methodology_version":"1.0"}
+            "methodology_version":"1.1"}
     data["notices"].sort(key=lambda x:max([abs(x.get("change_1d") or 0)]+[0]),reverse=True)
     # Safeguard: do not overwrite a published market dashboard with a nearly empty source outage.
-    if len(stocks) < 18 or "SPY" not in indices or "SOXX" not in indices:
-        sys.exit(f"Insufficient quote coverage ({len(stocks)}/{len(WATCHLIST)}, SPY={'SPY' in indices}, SOXX={'SOXX' in indices}); retained previous published snapshot")
+    if len(score_stocks) < 18 or "SPY" not in indices or "SOXX" not in indices:
+        sys.exit(f"Insufficient scoring quote coverage ({len(score_stocks)}/{len(SCORE_STOCKS)}, SPY={'SPY' in indices}, SOXX={'SOXX' in indices}); retained previous published snapshot")
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
     update_history(health, semi)
     LOG.info("Wrote %s: %d/%d stocks, %d macros, %d news, health=%s/%s coverage=%s",OUT,len(stocks),len(WATCHLIST),len(macro),len(news),health["score"],semi["score"],health["coverage"])

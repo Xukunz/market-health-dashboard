@@ -1,0 +1,18 @@
+.watch-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.watch-actions .outline-button{padding:10px 14px;font-size:11px}
+.score-quality{margin-top:9px;color:#9cb0b4;font-size:10px;line-height:1.6;max-width:440px}
+.watchlist-dialog{width:min(540px,calc(100vw - 28px));height:min(680px,calc(100vh - 30px));padding:25px;flex-direction:column;overflow:hidden}
+.watchlist-dialog[open]{display:flex}
+.watchlist-add-form{display:flex;gap:9px;margin-top:22px}
+.watchlist-add-form input{flex:1;min-width:0;background:#0e1b23;color:var(--text);border:1px solid #38505a;border-radius:9px;padding:11px 13px}
+.watchlist-add-form .primary-button{white-space:nowrap}
+.watchlist-note{font-size:11px;color:#9cafae;line-height:1.7;margin:12px 0}
+.watchlist-editor-rows{flex:1;min-height:80px;overflow:auto;border:1px solid #30444d;border-radius:10px;margin:14px 0}
+.watchlist-dialog .dialog-footer{flex-shrink:0;margin-top:auto}
+.watchlist-editor-row{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border-bottom:1px solid #263842;font-size:12px}
+.watchlist-editor-row:last-child{border-bottom:0}
+.watchlist-editor-row small{color:#8ba2a8;margin-left:9px}
+.watchlist-remove{border:0;background:transparent;color:#fa9690;font-size:11px;padding:5px 8px}
+.watchlist-missing{color:#f1bb69;font-size:10px}
+.watchlist-empty{padding:17px;color:#91a5ab;font-size:11px}
+@media(max-width:640px){.watch-actions{width:100%;justify-content:space-between}.watchlist-dialog{padding:18px}.watchlist-add-form{flex-wrap:wrap}.watchlist-add-form .primary-button{width:100%}}

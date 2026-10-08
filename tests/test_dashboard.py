@@ -13,17 +13,70 @@ spec.loader.exec_module(m)
 def fake_stock(symbol, price=100, high=105, change5=3):
     return {'symbol': symbol, 'price': price, 'sma20': 90, 'sma50': 90, 'sma200': 85,
             'change_1d':2,'change_5d':change5,'high20':high,
+            'date':'2026-10-08',
             'currency':'HKD' if symbol.endswith('.HK') else 'USD'}
 
 
 class HealthTests(unittest.TestCase):
+    def test_extra_display_stock_does_not_change_market_breadth(self):
+        stocks, indices, macro = self.full_data()
+        baseline = next(x for x in m.build_health(stocks, indices, macro)['components'] if x['key'] == 'breadth')
+        stocks['EXTRA'] = fake_stock('EXTRA', price=1)
+        updated = next(x for x in m.build_health(stocks, indices, macro)['components'] if x['key'] == 'breadth')
+        self.assertEqual(updated, baseline)
+
+    def test_score_inputs_are_fetched_without_display_watchlist(self):
+        universe = m.quote_universe([])
+        self.assertIn('AAPL', universe)
+        self.assertIn('NVDA', universe)
+        self.assertIn('SPY', universe)
+        self.assertIn('XLC', universe)
+        self.assertEqual(len(universe), len(set(universe)))
+
+    def test_breadth_uses_same_market_date_as_spy(self):
+        stocks, indices, macro = self.full_data()
+        for stock in stocks.values(): stock['date'] = '2026-10-08'
+        for index in indices.values(): index['date'] = '2026-10-08'
+        stocks['AAPL']['date'] = '2026-10-07'
+        indices['XLC']['date'] = '2026-10-07'
+        breadth = next(x for x in m.build_health(stocks, indices, macro)['components'] if x['key'] == 'breadth')
+        self.assertEqual(breadth['coverage'], '10个行业ETF + 35只美股')
+
+    def test_quality_report_exposes_sample_and_macro_fallback(self):
+        stocks, indices, macro = self.full_data()
+        indices['SPY']['date'] = '2026-10-08'
+        for stock in stocks.values(): stock['date'] = '2026-10-08'
+        for index in indices.values(): index['date'] = '2026-10-08'
+        macro['vix']['source'] = 'Yahoo Finance · ^VIX'
+        quality = m.build_health(stocks, indices, macro)['data_quality']
+        self.assertEqual(quality['reference_date'], '2026-10-08')
+        self.assertEqual(quality['sector_count'], 11)
+        self.assertEqual(quality['stock_count'], 36)
+        self.assertEqual(quality['macro_proxy_count'], 1)
+
+    def test_quality_counts_only_sources_used_in_score(self):
+        stocks, indices, macro = self.full_data()
+        macro['treasury_10y']['source'] = 'Yahoo Finance · ^TNX'
+        del macro['brent']
+        quality = m.build_health(stocks, indices, macro)['data_quality']
+        self.assertEqual(quality['macro_proxy_count'], 0)
+
+    def test_old_macro_observation_is_not_scored(self):
+        stocks, indices, macro = self.full_data()
+        for stock in stocks.values(): stock['date'] = '2026-10-08'
+        for index in indices.values(): index['date'] = '2026-10-08'
+        macro['vix']['date'] = '2026-09-30'
+        health = m.build_health(stocks, indices, macro)
+        self.assertNotIn('volatility', [part['key'] for part in health['components']])
+        self.assertEqual(health['coverage'], 80)
+
     def full_data(self):
         stocks = {s:fake_stock(s) for s in [x[0] for x in m.WATCHLIST]}
         indices = {s:fake_stock(s) for s in m.SECTORS + ['SPY','SOXX']}
         macro = {'vix':{'value':13,'date':'2026-10-08'},
                  'treasury_10y':{'value':3.1,'date':'2026-10-08'},
-                 'brent':{'value':70,'change_5obs_pct':-6},
-                 'high_yield_spread':{'value':2.8}}
+                 'brent':{'value':70,'change_5obs_pct':-6,'date':'2026-10-08'},
+                 'high_yield_spread':{'value':2.8,'date':'2026-10-08'}}
         return stocks,indices,macro
 
     def test_health_bullish_full_score(self):
@@ -51,11 +104,26 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(h['coverage'],0)
         self.assertIsNone(m.build_semi_health({}, {})['score'])
 
+    def test_missing_spy_reference_does_not_publish_a_market_score(self):
+        stocks, indices, macro = self.full_data()
+        del indices['SPY']
+        self.assertIsNone(m.build_health(stocks, indices, macro)['score'])
+
     def test_chip_health_full(self):
         stocks,indices,_=self.full_data()
         s=m.build_semi_health(stocks,indices)
         self.assertGreaterEqual(s['score'],80)
         self.assertGreaterEqual(s['chip_count'],6)
+
+    def test_semi_excludes_mismatched_chip_and_spy_dates(self):
+        stocks, indices, _ = self.full_data()
+        for stock in stocks.values(): stock['date'] = '2026-10-08'
+        indices['SOXX']['date'] = '2026-10-08'
+        indices['SPY']['date'] = '2026-10-07'
+        stocks['NVDA']['date'] = '2026-10-07'
+        semi = m.build_semi_health(stocks, indices)
+        self.assertEqual(semi['chip_count'], 14)
+        self.assertEqual(semi['coverage'], 80)
 
     def test_price_move_alerts(self):
         a=m.alert_for({'change_1d':-6.4,'change_5d':-11,'volume_multiple':2.3,'volume':8000})
