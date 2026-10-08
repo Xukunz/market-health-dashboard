@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1119" />
+  <meta name="description" content="市场健康度、半导体板块、自选股与宏观数据的每日更新面板。" />
+  <title>市场脉搏 · MARKET PULSE</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="侧边导航">
+      <a class="brand" href="#overview" aria-label="市场脉搏首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 38 38"><path d="M3 22h8l5-12 6 19 5-10h8" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" /></svg></span>
+        <span><strong>MARKET<span class="brand-green">PULSE</span></strong><small>市场脉搏 / DAILY BRIEF</small></span>
+      </a>
+      <div class="sidebar-separator"></div>
+      <div class="nav-label">WORKSPACE <span>01</span></div>
+      <nav class="nav-links" aria-label="页面导航">
+        <a class="nav-link active" href="#overview" data-section="overview"><span class="nav-icon">◫</span><span>总览看板</span><span class="nav-counter">01</span></a>
+        <a class="nav-link" href="#score-detail" data-section="score-detail"><span class="nav-icon">◎</span><span>健康度模型</span></a>
+        <a class="nav-link" href="#watchlist" data-section="watchlist"><span class="nav-icon">⌁</span><span>自选股追踪</span><span class="nav-counter" id="nav-stock-count">38</span></a>
+        <a class="nav-link" href="#events" data-section="events"><span class="nav-icon">▤</span><span>重大事件</span></a>
+        <a class="nav-link" href="#portfolio" data-section="portfolio"><span class="nav-icon">▥</span><span>本地持仓</span><span class="lock-icon" title="仅保存在本机浏览器">⌑</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-live"><span class="tiny-pulse"></span><span>DAILY MARKET INTELLIGENCE</span></div>
+        <div class="side-info">公开市场数据 · 每日收盘后更新<br/>非实时交易终端 / 非投资建议</div>
+        <div class="side-version">MP / V1.0 <span>© 2026</span></div>
+      </div>
+    </aside>
+
+    <div class="content-wrap">
+      <header class="topbar">
+        <div class="breadcrumb">工作台 <span>/</span> <strong>市场总览</strong></div>
+        <div class="topbar-right">
+          <span class="market-clock" id="market-clock">纽约时间 --:--</span>
+          <span class="topbar-divider"></span>
+          <span class="data-status" id="data-status"><span class="status-dot"></span>等待数据</span>
+          <button class="icon-button" id="reload-btn" aria-label="重新载入数据" title="重新载入已发布的数据"><svg viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.4 9a7 7 0 0 1 11.7-2L20 12M4 12l1.9 5a7 7 0 0 0 11.7-2"/></svg></button>
+        </div>
+      </header>
+
+      <main class="main" id="overview">
+        <section class="intro fade-up">
+          <div><div class="eyebrow"><span class="eyebrow-rule"></span> MARKET INTELLIGENCE <span class="slanted">/</span> DAILY OVERVIEW</div>
+            <h1>读懂市场，<em>而不只是价格。</em></h1>
+            <p class="subtitle">趋势、广度、波动、利率与信用风险。一个面板，追踪影响你持仓的关键信号。</p>
+          </div>
+          <div class="intro-actions"><div class="asof" id="asof-time">数据生成于 —</div><button class="outline-button" id="method-button"><span>评分方法</span><span class="out-arrow">↗</span></button></div>
+        </section>
+
+        <div class="notice-banner hidden" id="stale-banner" role="status"></div>
+        <section class="score-layout fade-up" aria-label="市场健康度">
+          <article class="hero card">
+            <div class="card-top"><div class="section-kicker"><span class="green-square"></span> MARKET HEALTH INDEX</div><span class="subtle-pill">0—100 / 规则评分</span></div>
+            <div class="hero-body">
+              <div class="hero-score">
+                <div class="hero-number" id="main-score">—<span class="score-denom">/100</span></div>
+                <div class="score-state" id="score-state">等待首次数据更新</div>
+                <p id="score-explainer">由5个可复核维度计算；缺失数据不会被假定为正常。</p>
+                <div class="score-coverage" id="score-coverage">数据覆盖率 —</div>
+              </div>
+              <div class="gauge" aria-label="市场健康度仪表盘">
+                <svg viewBox="0 0 300 176" role="img" aria-label="市场评分仪表盘">
+                  <defs><linearGradient id="gaugeGradient"><stop offset="0%" stop-color="#f77779"/><stop offset="51%" stop-color="#efb95c"/><stop offset="100%" stop-color="#b6f26d"/></linearGradient></defs>
+                  <path class="gauge-track" d="M35 150 A115 115 0 0 1 265 150" />
+                  <path class="gauge-progress" id="gauge-fill" d="M35 150 A115 115 0 0 1 265 150" pathLength="100" stroke-dasharray="0 100" />
+                  <line id="gauge-needle" x1="150" y1="150" x2="150" y2="53" transform="rotate(-90 150 150)" />
+                  <circle cx="150" cy="150" r="7" fill="#cbd2d5"/>
+                  <text x="33" y="170">0</text><text x="254" y="170">100</text>
+                </svg>
+                <div class="gauge-note">风险较高 <span>→</span> 状态健康</div>
+              </div>
+            </div>
+            <div class="hero-bottom">
+              <div><span class="meta-label">评估时间框架</span><strong>未来 1—4 周</strong></div>
+              <div><span class="meta-label">更新机制</span><strong>每日 EOD</strong></div>
+              <div><span class="meta-label">模型版本</span><strong>MP 1.0</strong></div>
+            </div>
+          </article>
+          <article class="semi card">
+            <div class="card-top"><div class="section-kicker"><span class="orange-square"></span> SEMICONDUCTOR STRESS</div><span class="subtle-pill">SOXX + 样本</span></div>
+            <div class="semi-main"><div class="semi-score" id="semi-score">—<span>/100</span></div><div class="semi-label" id="semi-label">等待数据</div>
+              <p>独立评估半导体板块的技术趋势、相对强弱与内部广度。</p></div>
+            <div class="semi-meter"><div id="semi-meter-fill"></div></div>
+            <div class="semi-divider"></div>
+            <div class="semi-stats">
+              <div><span>参考标的</span><strong>SOXX / SPY</strong></div>
+              <div><span>样本覆盖</span><strong id="semi-coverage">—</strong></div>
+              <div><span>关键监测</span><strong>AI · 存储 · 设备</strong></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="benchmark-section fade-up" aria-labelledby="bench-title">
+          <div class="section-header"><div><span class="section-index">01 / MARKET SNAPSHOT</span><h2 id="bench-title">主要市场 <span>表现</span></h2></div><span class="right-note">每日收盘数据 · 涨跌幅均为单交易日</span></div>
+          <div class="benchmark-grid" id="benchmark-grid"></div>
+        </section>
+
+        <section class="analysis-grid fade-up" id="score-detail">
+          <article class="card factors-card">
+            <div class="card-top"><div class="section-kicker">HEALTH COMPOSITION</div><span class="subtle-pill">模型透明</span></div>
+            <div class="card-section-title">健康度拆解 <span>哪些指标在拖累市场？</span></div>
+            <div class="factors" id="factors"></div>
+            <div class="card-footnote">每个维度显示得分 / 最大分值。缺失数据会降低覆盖率，而不是自动记为0或满分。</div>
+          </article>
+          <article class="card trend-card">
+            <div class="card-top"><div class="section-kicker">HEALTH SCORE HISTORY</div><span class="subtle-pill">最多120天</span></div>
+            <div class="card-section-title">市场健康度 <span>历史变化</span></div>
+            <div class="legend"><span><i class="legend-dot green"></i>市场整体</span><span><i class="legend-dot orange"></i>半导体</span></div>
+            <div class="history-chart" id="history-chart"></div>
+            <div class="history-bottom"><span>历史分数在每天工作流运行后追加</span><span id="history-count">0 个数据点</span></div>
+          </article>
+        </section>
+
+        <section class="macro-section fade-up">
+          <div class="section-header"><div><span class="section-index">02 / MACRO MONITOR</span><h2>宏观 <span>压力监控</span></h2></div><span class="right-note">FRED官方宏观数据 · 发布频率可能不同</span></div>
+          <div class="macro-grid" id="macro-grid"></div>
+        </section>
+
+        <section class="watch-section fade-up" id="watchlist">
+          <div class="section-header"><div><span class="section-index">03 / WATCHLIST</span><h2>股票 <span>雷达</span></h2></div><div class="watch-actions"><span id="stock-count-summary">38只追踪标的</span></div></div>
+          <div class="watch-card card">
+            <div class="watch-toolbar"><div class="tabs" role="group" aria-label="筛选股票"><button class="tab active" data-filter="all">全部标的</button><button class="tab" data-filter="alert">显著异动</button><button class="tab" data-filter="chip">半导体</button><button class="tab" data-filter="hk">中概 / 港股</button></div><div class="search-box"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.2 4.2"/></svg><input id="stock-search" aria-label="搜索股票" placeholder="搜索代码 / 名称" /></div></div>
+            <div class="table-scroll"><table class="stock-table"><thead><tr><th><button data-sort="symbol">标的 ↕</button></th><th>板块</th><th class="num"><button data-sort="price">价格 ↕</button></th><th class="num"><button data-sort="change_1d">日涨跌 ↕</button></th><th class="num"><button data-sort="change_5d">5日变化 ↕</button></th><th class="num"><button data-sort="volume_multiple">量比 ↕</button></th><th class="chart-cell">近25日走势</th><th>状态</th></tr></thead><tbody id="stock-rows"></tbody></table></div>
+            <div class="table-foot"><span>价格为来源提供的最近一个交易日收盘数据，可能延迟。成交量比值仅供参考。点击股票行查看20日关键参考价。</span><span id="table-result-count">—</span></div>
+          </div>
+        </section>
+
+        <section class="events-section fade-up" id="events">
+          <div class="section-header"><div><span class="section-index">04 / RISK SIGNALS</span><h2>异动与 <span>新闻事件</span></h2></div><span class="right-note">新闻标题仅做线索 · 不自动认定消息属实</span></div>
+          <div class="events-grid">
+            <article class="card alerts-card"><div class="card-top"><div class="section-kicker"><span class="orange-square"></span> QUANT ALERTS</div><span class="subtle-pill">价格 / 成交量</span></div><div class="event-card-title">价格异动清单</div><div class="alert-list" id="alert-list"></div></article>
+            <article class="card news-card"><div class="card-top"><div class="section-kicker"><span class="green-square"></span> NEWS WATCH</div><span class="subtle-pill">来源链接</span></div><div class="event-card-title">待核实的重要新闻</div><div class="news-list" id="news-list"></div></article>
+          </div>
+        </section>
+
+        <section class="portfolio-section fade-up" id="portfolio">
+          <div class="section-header"><div><span class="section-index">05 / PRIVATE PORTFOLIO</span><h2>我的 <span>仓位观察</span></h2></div><span class="privacy-label"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>仅存本机浏览器</span></div>
+          <article class="portfolio-card card"><div class="portfolio-intro"><div class="portfolio-icon">▥</div><div><h3>自选股之外，还需要看仓位风险。</h3><p>录入持股数量及成本后，本机计算仓位集中度和浮动盈亏。不会上传账户号码、交易记录或持仓数据。</p></div><button class="primary-button" id="edit-portfolio">编辑我的持仓 <span>↗</span></button></div>
+            <div class="portfolio-output" id="portfolio-output"></div></article>
+        </section>
+
+        <footer class="footer"><div class="footer-brand">MARKET<span>PULSE</span><small> / independent daily dashboard</small></div><p>非实时行情 · 非投资建议。价格、新闻与模型均应在交易前由权威来源核实。</p><span>DESIGNED FOR CLARITY · 2026</span></footer>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="portfolio-dialog stock-dialog" id="stock-dialog" aria-labelledby="stock-detail-title">
+    <div class="stock-detail-shell">
+      <div class="dialog-header"><div><div class="section-kicker">EOD TECHNICAL SNAPSHOT</div><h2 id="stock-detail-title">股票详情</h2><p id="stock-detail-subtitle">来源日期和关键区间</p></div><button class="dialog-close" type="button" id="close-stock" aria-label="关闭">×</button></div>
+      <div id="stock-detail-content"></div>
+    </div>
+  </dialog>
+  <dialog class="portfolio-dialog" id="portfolio-dialog" aria-labelledby="portfolio-title"><form method="dialog" id="portfolio-form"><div class="dialog-header"><div><div class="section-kicker">LOCAL-ONLY PORTFOLIO</div><h2 id="portfolio-title">编辑持仓</h2><p>信息只存储在当前浏览器的 localStorage，公开网页访客不会看到你的数据。</p></div><button class="dialog-close" type="button" id="close-portfolio" aria-label="关闭">×</button></div>
+    <div class="dialog-subhead"><span>股票代码</span><span>持仓股数</span><span>平均成本</span><span></span></div><div class="portfolio-inputs" id="portfolio-inputs"></div>
+    <button type="button" class="add-position" id="add-position">＋ 添加一只股票</button>
+    <div class="dialog-footer"><button class="danger-text-button" id="clear-portfolio" type="button">清空本机持仓</button><div><button class="outline-button" id="cancel-portfolio" type="button">取消</button><button class="primary-button" type="submit" value="save">保存到本机</button></div></div></form></dialog>
+</body>
+</html>
