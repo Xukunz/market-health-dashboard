@@ -1,8 +1,8 @@
 {
   "meta": {
     "status": "ready",
-    "generated_at": "2026-10-08T18:58:15.850360+00:00",
-    "generated_et": "2026-10-08T14:58:15.850360-04:00",
+    "generated_at": "2026-10-08T18:59:20.673771+00:00",
+    "generated_et": "2026-10-08T14:59:20.673771-04:00",
     "market_data_dates": [
       "2026-10-08",
       "2026-10-07"
@@ -16,9 +16,9 @@
     "errors": "部分数据源可能限流，缺失则留空，不会使用旧截图填充。"
   },
   "health": {
-    "score": 65,
-    "observed_points": 65,
-    "coverage": 100,
+    "score": null,
+    "observed_points": 33,
+    "coverage": 45,
     "label": "观察池风险评分",
     "components": [
       {
@@ -36,30 +36,6 @@
         "max": 20,
         "reason": "板块ETF站上50日线27% · 自选股样本站上50日线58%",
         "coverage": "11个行业ETF + 36只美股"
-      },
-      {
-        "key": "volatility",
-        "name": "波动环境",
-        "score": 16,
-        "max": 20,
-        "reason": "VIX 15.08（2026-10-07）",
-        "coverage": "FRED VIXCLS"
-      },
-      {
-        "key": "macro",
-        "name": "利率与能源",
-        "score": 4,
-        "max": 20,
-        "reason": "10Y 5.27% · Brent近5个观测值变化 +10.1%",
-        "coverage": "FRED DGS10 + DCOILBRENTEU"
-      },
-      {
-        "key": "credit",
-        "name": "信用压力",
-        "score": 12,
-        "max": 15,
-        "reason": "美国高收益债OAS 3.09%",
-        "coverage": "FRED BAMLH0A0HYM2"
       }
     ],
     "disclaimer": "规则化风险状态指标，不是官方指数；缺失分项时按已获数据归一化，覆盖率低于60%则不出分。上涨广度是行业ETF和自选股样本，不代表全市场涨跌家数。"
@@ -2292,63 +2268,7 @@
     }
   ],
   "missing_stocks": [],
-  "macro": [
-    {
-      "key": "treasury_10y",
-      "name": "美国10年期国债收益率",
-      "unit": "%",
-      "value": 5.27,
-      "date": "2026-10-06",
-      "change_5obs": 0.01,
-      "change_5obs_pct": 0.19,
-      "source": "FRED · DGS10",
-      "url": "https://fred.stlouisfed.org/series/DGS10"
-    },
-    {
-      "key": "treasury_30y",
-      "name": "美国30年期国债收益率",
-      "unit": "%",
-      "value": 5.64,
-      "date": "2026-10-06",
-      "change_5obs": 0.05,
-      "change_5obs_pct": 0.89,
-      "source": "FRED · DGS30",
-      "url": "https://fred.stlouisfed.org/series/DGS30"
-    },
-    {
-      "key": "vix",
-      "name": "VIX波动率指数",
-      "unit": "",
-      "value": 15.08,
-      "date": "2026-10-07",
-      "change_5obs": -1.26,
-      "change_5obs_pct": -7.71,
-      "source": "FRED · VIXCLS",
-      "url": "https://fred.stlouisfed.org/series/VIXCLS"
-    },
-    {
-      "key": "brent",
-      "name": "Brent现货原油",
-      "unit": "USD/桶",
-      "value": 125.44,
-      "date": "2026-10-06",
-      "change_5obs": 11.48,
-      "change_5obs_pct": 10.07,
-      "source": "FRED · DCOILBRENTEU",
-      "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU"
-    },
-    {
-      "key": "high_yield_spread",
-      "name": "美国高收益债信用利差",
-      "unit": "%",
-      "value": 3.09,
-      "date": "2026-10-07",
-      "change_5obs": -0.03,
-      "change_5obs_pct": -0.96,
-      "source": "FRED · BAMLH0A0HYM2",
-      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
-    }
-  ],
+  "macro": [],
   "news": [
     {
       "title": "Nvidia, Oracle, CoreWeave and other AI stocks sink on OpenAI revenue report - CNBC",
@@ -2356,6 +2276,16 @@
       "published_at": "2026-10-08T18:14:54+00:00",
       "publisher": "CNBC",
       "category": "科技",
+      "potentially_material": true,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Dow Jones forecast: Stocks extend drop amid surging oil and elevated yields - FOREX.com",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQTzZMc1ZRWEdIbldtbnluWEx5ZXV6U1YzNmhuTi1NeHpFUHBXckJHa182bzJJblItNVNzeWp3T1ZyWDd0NEdaYlpNSWsyUk44d1l2MktrU0puOEgyeTZKNEo3QzBvaTVxWEdmNFJzZG96dFF2dXBSRlB2NnVQLW1LaTFUU1ZmZlV3RjZxd19kWmF5OUU1NDdCcnRrNHdsOXRGeFY1dG1qSVdzZHgwVXZjcnVfV0tQNEVKUDVlNzRjTzJNS1F6RHlBQ1RB0gHKAUFVX3lxTFBPNkxzVlFYR0huV21ueW5YTHlldXpTVjM2aG5OLU14ekVQcFdyQkdrXzZvMkluUi01U3N5andPVnJYN3Q0R1piWk1JazJSTjh3WXYyS2tTSm44SDJ5Nko0SjdDMG9pNXFYR2Y0UnNkb3p0UXZ1cFJGUHY2dVAtbUtpMVRTVmZmVXdGNnF3X2RaYXk5RTU0N0JydGs0d2w5dEZ4VjV0bWpJV3NkeDBVdmNydV9XS1A0RUpQNWU3NGNPMk1LUXpEeUFDVEE?oc=5",
+      "published_at": "2026-10-08T17:42:27+00:00",
+      "publisher": "FOREX.com",
+      "category": "宏观",
       "potentially_material": true,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
@@ -2471,16 +2401,6 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Dow Tumbles, Oil Surges, and Yields Rise to New 24-Year Highs as Trump Considers Ramping Up Iran Attacks - 24/7 Wall St.",
-      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOWm1JY01GWm80Q1FydkR1LWU3anU2UWE2YmwyVGdVOEVyWG43eDhYSllBZVVFVkRFMl93bE85UWR6cUNyS2lacUlUNVd1Q1ZLUm9zdTZGTEp4NUc2S1JlXzFITjRZX0g5Y2lLb0M2UDhhVVhhdjk5NjlKSXVCZkxWam51YkJnN2RyQ1o2T0lNd1ZvWVJVcHluYjhWelZTZldJNkk5MUQ3cWZhcXlwaDdqWVpZSlVKWWxPMGFvcXJIODktTklLX2pSYy1qRTQ0SllMOXRNclJxRkFuTThEX1dZ?oc=5",
-      "published_at": "2026-10-08T16:37:00+00:00",
-      "publisher": "24/7 Wall St.",
-      "category": "宏观",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
       "title": "What's Going On With Microsoft Stock Thursday? - Benzinga",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQNF9lOGZGR19YSUItYngtQktyR1BTT1RtbHhIakFrY0lPdjRtN0VRLTdlN0xsVHdKNXZ0U3poOEZERWFaNUZ3NGIwemNNYkUzVEhJMDlUbzljc0RodFhfTDAzbk83OVNHeWpXZHZYb18wRXk5WTBDRVI2dzRoSVRrR1dVRUdkY1pQd1lUUTFzVmc0aXR6UWxzQjAtTHVjQUwx?oc=5",
       "published_at": "2026-10-08T16:36:56+00:00",
@@ -2571,16 +2491,6 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Baidu, Inc. (BIDU) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9DZWhfaDk3czIteVJjbHp5LUQ0WkxFSkFnYWJyaHNSZ1R1ZzEyTlBrZUhuMnBkeWdPZ1FlbGZENEFRMUhEY3ZJMmdZMEtNWkRtOVE?oc=5",
-      "published_at": "2026-10-08T14:16:49+00:00",
-      "publisher": "Yahoo! Finance Canada",
-      "category": "中概",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
       "title": "Sharp rise in crude oil prices weighs on Wall Street - Scranton Times-Tribune",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOejVkTTR6YXRtRUxHekZ3cUFwSE1PMHB3eUdVLU1iMzVRb0dDb0VObnVCOXFpVUFNOUJ2OHdndVhzbVplWVktMEFkX3g4aExCeUhMbzdRMXh1dVpWNWRpRVlYMmJ3c2toSzBlYWprVk5UTXNpeVFNVHB5T0JNZkl1Yw?oc=5",
       "published_at": "2026-10-08T13:52:17+00:00",
@@ -2664,6 +2574,16 @@
       "title": "XPeng Inc. (XPEV) Stock Price, News, Quote & History - Yahoo! Finance Canada",
       "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBJZmUzRUFURVJzNkhmdlF4STN3RHRzbUg3ZnFILWtrdzNyRTFrVGd1THVEa0xNLUZtUEphM213Sm8xb3lWUTJtWnQ3N3dtVnM1TWc?oc=5",
       "published_at": "2026-10-08T08:04:22+00:00",
+      "publisher": "Yahoo! Finance Canada",
+      "category": "中概",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Baidu, Inc. (BIDU) Stock Price, News, Quote & History - Yahoo! Finance Canada",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9DZWhfaDk3czIteVJjbHp5LUQ0WkxFSkFnYWJyaHNSZ1R1ZzEyTlBrZUhuMnBkeWdPZ1FlbGZENEFRMUhEY3ZJMmdZMEtNWkRtOVE?oc=5",
+      "published_at": "2026-10-08T06:22:34+00:00",
       "publisher": "Yahoo! Finance Canada",
       "category": "中概",
       "potentially_material": false,

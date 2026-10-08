@@ -2,9 +2,9 @@
   "points": [
     {
       "date": "2026-10-08",
-      "market": 65,
+      "market": null,
       "semiconductors": 88,
-      "coverage": 100
+      "coverage": 45
     }
   ]
 }
