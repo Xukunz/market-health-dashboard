@@ -55,6 +55,13 @@
       "semiconductors": 23,
       "coverage": 85,
       "methodology_version": "1.1"
+    },
+    {
+      "date": "2026-10-16",
+      "market": null,
+      "semiconductors": 22,
+      "coverage": 45,
+      "methodology_version": "1.1"
     }
   ]
 }
