@@ -1,8 +1,8 @@
 {
   "meta": {
     "status": "ready",
-    "generated_at": "2026-10-24T01:33:09.023132+00:00",
-    "generated_et": "2026-10-23T21:33:09.023132-04:00",
+    "generated_at": "2026-10-25T01:06:10.638224+00:00",
+    "generated_et": "2026-10-24T21:06:10.638224-04:00",
     "market_data_dates": [
       "2026-10-23"
     ],
@@ -15,8 +15,8 @@
     "errors": "部分数据源可能限流，缺失则留空，不会使用旧截图填充。"
   },
   "health": {
-    "score": 48,
-    "observed_points": 41,
+    "score": 41,
+    "observed_points": 35,
     "coverage": 85,
     "label": "观察池风险评分",
     "components": [
@@ -47,9 +47,9 @@
       {
         "key": "macro",
         "name": "利率与能源",
-        "score": 13,
+        "score": 7,
         "max": 20,
-        "reason": "10Y 4.99% · Brent近5个观测值变化 +1.6%",
+        "reason": "10Y 4.99% · Brent近5个观测值变化 +6.2%",
         "coverage": "Yahoo Finance · ^TNX（FRED 不可用时的兜底） + Yahoo Finance · BZ=F（FRED 不可用时的兜底）"
       }
     ],
@@ -1817,8 +1817,8 @@
       "change_1d": -0.84,
       "change_5d": 1.95,
       "change_20d": 7.26,
-      "volume": 275,
-      "volume_multiple": 1.53,
+      "volume": 300,
+      "volume_multiple": 1.67,
       "sma20": 778242.4,
       "sma50": 766386.26,
       "sma200": 741916.82,
@@ -2337,60 +2337,30 @@
       "key": "brent",
       "name": "Brent 原油期货（BZ=F 近月）",
       "unit": "USD/桶",
-      "value": 111.66,
+      "value": 116.72,
       "date": "2026-10-23",
-      "change_5obs": 1.8,
-      "change_5obs_pct": 1.64,
+      "change_5obs": 6.86,
+      "change_5obs_pct": 6.24,
       "source": "Yahoo Finance · BZ=F（FRED 不可用时的兜底）",
       "url": "https://finance.yahoo.com/quote/BZ%3DF"
     }
   ],
   "news": [
     {
-      "title": "SK Hynix (000660 KS) Tactical Outlook Ahead of Q3 Earnings: Trend Changed - Smartkarma",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQTnVaVmpXNmgxdkliQ3c1eVVxNlRnck81dG5xb0Y2RTllalBQcmN1ckNLdWgwRHVkSWVzRm5Ib3YxelMtTGVsNmR4NzIyMEtKSkVfWDZiNnZNMGYxekpYbldzajNuYlVrdllpZGdHTmxGWmlPenVVR0kyVXdlY2RTb1JjcENXZHhsb21WbHcybEtyOE5mQlhFUnl6dkFXb25taG1fZkExY0Ftdw?oc=5",
-      "published_at": "2026-10-23T21:14:04+00:00",
-      "publisher": "Smartkarma",
-      "category": "半导体",
-      "potentially_material": true,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Apple Stock Hits Record High On iPhone Duo Launch - Investor's Business Daily",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNdUltNURaQjNjcmctdzRVNGdxX3ZWbmE0ejVOc0c3aXFjQVUzVC14VURDMGRKQzViUzFQdlV1Z3hOQy1sZTJNdkVrWDFxOC0zSXlTalJyQW1TbVdhYVRQRFU3UmxCREFPdWlHbzRxOEg3T1BRMTh5cGxPRk00d3VualFvbnhhOEFaYkIwVTRsRUtNRlZobjdz?oc=5",
-      "published_at": "2026-10-23T20:05:00+00:00",
-      "publisher": "Investor's Business Daily",
+      "title": "Microsoft's $50 Billion Gamble: Can Microsoft’s Azure Growth Justify Its Exploding AI Budget? - 24/7 Wall St.",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQMUsyVnlVRjI5ZjFFeTQzdG55X3hyaVhqU1VKaFVjMENpZWxoMF9WQUdzRDM2VXg5T1NsTTdNalFCRGtwcG1DaThUOTc1VzlJdlpmdDk2bXBXRjRUOTNkZ1pZdEVPOHByNS1JMFRQLThsTkhscmdwVnNUbHpyellqTEdXMWZGWjZoc3Q4N2dKLVJoazU0YnJfeVhRemFtMmt0UkdqSWpud1IzV2N3SGU3Q1hOYThmRWVOd0I0UWNhTDVtR1NVbGQ1eTdhb1M?oc=5",
+      "published_at": "2026-10-24T15:44:00+00:00",
+      "publisher": "24/7 Wall St.",
       "category": "科技",
       "potentially_material": true,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Amazon Stocks Edge Lower Ahead of Earnings After 37% AWS Revenue Growth - GuruFocus",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNbnZha0pYcjlIdjEwejE0U1Q5SnFHQnNaTm43dlBUMzZ0THRFY3c1OWw5c3Jxc2Y3ZmN2azZrMUcxbEhDaFRBdVRzSmNteUxHMkZHREdOWDdRU2NaOXZKSnV2YWJSdjNXdGR4d3E1cW1Gd2NXMk5ENnJ4Unh3MjZ5WVRJczB3RE95dXNfWlpidVlMRzQtelQwU1d0YlNmbkRFckpxX3E1RDZ6ZlZkcEE?oc=5",
-      "published_at": "2026-10-23T19:57:05+00:00",
-      "publisher": "GuruFocus",
-      "category": "科技",
-      "potentially_material": true,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Amazon Stocks Edge Lower Ahead of Earnings After 37% AWS Revenue Growth - TradingView",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPbHNVaVZqRF9OOEN6bi1OeF9LWHhwNGFzY3M3SC01eEVtUTlHUXBKR20yNnFHNDhSNUJQSF9iUTNHcTdtNWo1MTM1aWRhTXlRalJSZ3NzblIyMGRyUGlaT2s1ZUtJNzhCLUE1RjludThreHYyTTE2ZWZwY25BM3oxMldSanZYTmw3ZmNIeHhFYTJuNFJWMTRZYVRQU0sxb1o0UzFDY0ZZdnBCRWZtakFZUEdfc0QtUU9odWNveU1fMWc0SndiSmVNWlV3?oc=5",
-      "published_at": "2026-10-23T19:25:07+00:00",
+      "title": "US Tech Stocks Under Pressure: 3 Stocks to Watch Before Next Week’s Earnings - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOTkFfYWVKM1JvcE92QmdpdTVXVXF5cC1naVNWZzdNR2NzdmYwc1lrZnRPbGExQW1LR244WFpIaHZZNkplUFhiSW9lc1oxS0UwdkFNTVZNZTRFMTBfTU1ieVhqYmNiUFJ1b2hJaUFKLVpwYk9XMUpYU0JBeDJ3Qi1hS1ZKemFvVFYtUjZ1UjRfNk0xWGpLTzByZlJNak9sM1hOTGl2YTNSdmtSRTFZcWNsMUUyTW9OQkNUUXl6Z0pfLW00R2JsV29xR3JGZGFoUXlC?oc=5",
+      "published_at": "2026-10-24T11:21:56+00:00",
       "publisher": "TradingView",
-      "category": "科技",
-      "potentially_material": true,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Microsoft Stocks Face a Cloud-Margin Test in Wednesday's AI Earnings - GuruFocus",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNQWlGNWl4cG0zYlNVZEE4Vm9ETTJKSlhwZ0FMNW5BbThmTnJPWGtaa1M3bm43ZmxKa1dlSEhGNTdSZ2FEcHdrUVZaTmtCZDhUNzVhTktoYnVQeHdNd3FtOGhHVTEwUzM4Um5tZi1yQVhlUzZSZWNoNy1rVlpzRnZJdEpwV0x0dkRMWkFBN2hBWUhVU3RybEs2ZHBPVWNYYl9WZVRrQm9uS08?oc=5",
-      "published_at": "2026-10-23T18:48:36+00:00",
-      "publisher": "GuruFocus",
       "category": "科技",
       "potentially_material": true,
       "verified": false,
@@ -2408,7 +2378,7 @@
     },
     {
       "title": "Exclusive | EU mulls sanctions reprieve for Chinese fabric-maker accused of aiding Russia - South China Morning Post",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPN01xMGc2eVJIUHIxQ0lyWDRwSmkxSUcxUTlyNHVfUHVBRXNfYURzS202dGtSVEN1cjh0cE1JNzlzSzdFRk5xMjBBWGhuLS11RGhwQlRONmlUejZ6OUdDazduT25za1UwTnNqaUNTa0MxemFWQWdKRkE2Z25MYXdYTnBVcndjVG4tYUk4b3BhSWtvcVZSSXFVQXllWGRDVFZCaktFa0tYTVVMRGpFTjRMZkxuczhUcEhaX0HSAboBQVVfeXFMTzdNcTBnNnlSSFByMUNJclg0cEppMUlHMVE5cjR1X1B1QUVzX2FEc0ttNnRrUlRDdXI4dHBNSTc5c0s3RUZOcTIwQVhobi0tdURocEJUTjZpVHo2ejlHQ2s3bk9uc2tVME5zamlDU2tDMXphVkFnSkZBNmduTGF3WE5wVXJ3Y1RuLWFJOG9wYUlrb3FWUklxVUF5ZVhkQ1RWQmpLRWtLWE1VTERqRU40TGZMbnM4VHBIWl9B?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPOW1pTTFyVVZJd1ZMV2plOWdLUkFmOW1EZWhoN3NsRHByc0JRV0RtX24yVWNxc0dNcEtyTWdkb0xyMmR3Ym81OXBOSkJRR0psRk95a20zM3huQTlsbHN1bFV0d1ZYV3JSNkQ0YUZNRmhGWGpnRXFrZGxMQlk3ZXcwVGpFT1N3QWZYSVo3Z05XaHkwY1dCdEI3M01zNlpzY2Z2emZPM2ZOb19vVVd1SkNwSXZqUEN2NXJFdlHSAboBQVVfeXFMTzdNcTBnNnlSSFByMUNJclg0cEppMUlHMVE5cjR1X1B1QUVzX2FEc0ttNnRrUlRDdXI4dHBNSTc5c0s3RUZOcTIwQVhobi0tdURocEJUTjZpVHo2ejlHQ2s3bk9uc2tVME5zamlDU2tDMXphVkFnSkZBNmduTGF3WE5wVXJ3Y1RuLWFJOG9wYUlrb3FWUklxVUF5ZVhkQ1RWQmpLRWtLWE1VTERqRU40TGZMbnM4VHBIWl9B?oc=5",
       "published_at": "2026-10-22T20:32:36+00:00",
       "publisher": "South China Morning Post",
       "category": "监管",
@@ -2417,70 +2387,220 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "BABA Stock Quote Price and Forecast - CNN",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBuLWRhVktSNjNIMEJ4N0Z4OWx6cUlPTmNfeHRWbHp5ZHZwSEFGZGVrNU9vS1pMV2psUld2TXlDUUM5YV9qLWtPN0RDUlV6M001?oc=5",
-      "published_at": "2026-10-21T20:15:20+00:00",
-      "publisher": "CNN",
-      "category": "中概",
-      "potentially_material": true,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "EXCLUSIVE-Samsung, SK Hynix upgrading China plants to make more advanced chips, people say - Devdiscourse",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQRnlyeGRHVy1USXNmNWVnS043R2dxakxJQ2xtbVlDclE3c2V2Q21PQkhOdkZkbEpSV1ZtREpGSzVtcXlNcFBuUkNEdUxRUVlkUGc4WkFQb0VPMGpjRWRyY0kyNnpiVjRhMG5xbjFjdnRJSjFib2hwWVc3TkloY0JFUXZRZDBTdzV3ekozOFZ0Q2tGWTFGakJyRzJ6MDNhNEZSSUdOUXNVMk8tdWx1WmpNSzBLc2puVzFhZUg3dkhUdXpsZEZKTmtmS1VieEJRbzh2ZkJfb0pfYzNSQVlWX1I1LVIxOXdoQdIB5gFBVV95cUxQRnlyeGRHVy1USXNmNWVnS043R2dxakxJQ2xtbVlDclE3c2V2Q21PQkhOdkZkbEpSV1ZtREpGSzVtcXlNcFBuUkNEdUxRUVlkUGc4WkFQb0VPMGpjRWRyY0kyNnpiVjRhMG5xbjFjdnRJSjFib2hwWVc3TkloY0JFUXZRZDBTdzV3ekozOFZ0Q2tGWTFGakJyRzJ6MDNhNEZSSUdOUXNVMk8tdWx1WmpNSzBLc2puVzFhZUg3dkhUdXpsZEZKTmtmS1VieEJRbzh2ZkJfb0pfYzNSQVlWX1I1LVIxOXdoQQ?oc=5",
-      "published_at": "2026-10-21T07:20:13+00:00",
-      "publisher": "Devdiscourse",
+      "title": "Huawei secures $2.3 billion offshore loan to fund soaring chip development - https://streamlinefeed.co.ke/",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNOTFGRWtncFg4MXRSZW5McGprYW1XWVRzTVp4YV9iUWlqSUNac0h6R3FqeTJ5dGRPMjdxbmRJQy13bWxQRUUzM1RCRHNnMlJ6R05BUV9BSEZvOHl5OVdYcE85SW9ickZIZkZ3ZDU3NlpwSlJsUW51LWFaMjJDc0VRZ3pvaWo4amQ3ZVdUOTI3ekZWVkpnWDNSWktMMUxRXzlXWnZwNW5OenBFUGM?oc=5",
+      "published_at": "2026-10-22T10:23:13+00:00",
+      "publisher": "https://streamlinefeed.co.ke/",
       "category": "监管",
       "potentially_material": true,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Q3 2026 Earnings Conference Call Invitation - SK hynix",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE02c2hrdEVVY3NZTTIzb0E1bHk2XzFuMF9Nd1BLRWtVdEplYlNDcFZ1cXdmVmxadVpzc3QxVVRubkZCc0RTdHZYSC1lN2NuNXFkVG5BdTVJUzYyelVfZnZtNTRmWGRjZW1GU0F6Y1FNMndpcFkteEtxZ1ZqX2I?oc=5",
-      "published_at": "2026-10-21T05:47:40+00:00",
-      "publisher": "SK hynix",
+      "title": "Bernstein says Samsung overtook SK hynix in HBM revenue in 3Q26 - Investing.com",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPRkdYb2VMZGRvdUZYaWpRdzhRcHZhNHFubUN5US1WYnBJY2UwNVAxb2g2Qjg0N09uV0hVYXRxeE5zRGNaMUVQNlF0S0MwLS00RS0yMFVXS1JfcW5GWUE0THltbVN6ajYxVS1EbndMWm5xcWk1ZnFJdGxocGxMWWpxUDV6TmxvZjU4T0lPcHBUWmhUdTAwZTg3MUEzWktqQVg1T184bU84eW9mQWs1OFRmdXVSSTlzbGlKVDIwelgyeTNIbGc?oc=5",
+      "published_at": "2026-10-22T10:00:32+00:00",
+      "publisher": "Investing.com",
       "category": "半导体",
       "potentially_material": true,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Wall Street loses ground under pressure from rising oil prices - Hartford Courant",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE81NThxeHlReWFTaEFxX1l1RjhOQUUzeExHczBnVGljMXktcndsOGJ4bjh3NkFGdDNvbHpKdFoxNzlxdDRWRUowNlVfUU9jaGdVSGNTYTZVemRWeW4tOEtFaXY1RE53X0Jyd1ZPWS00UlllVGNxTE9jLQ?oc=5",
-      "published_at": "2026-10-23T22:58:35+00:00",
-      "publisher": "Hartford Courant",
-      "category": "宏观",
+      "title": "symbol__ Stock Quote Price and Forecast - CNN",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5YX3luXzNQYkVaQnFfYTQ3OEI1NENsSGlHT1lnOVdtY1JXMFhDMG8xTE1ETXFIQld4d2hvY0ZMUTV6elJaMF8yc21UZ19WOG5X?oc=5",
+      "published_at": "2026-10-22T08:02:43+00:00",
+      "publisher": "CNN",
+      "category": "半导体",
+      "potentially_material": true,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Nvidia and 3 AI Infrastructure Stocks Backed by Hyperscaler Data Center Spending - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQQ0lCeUY5c1VqdGJvR0t4SlpGR3RsRTNHbHpPa3ViZHhZUExPenNrWER2YWtXNV9WMWhLXzN4V0dNb0d2ZVl3SlBYVnFDaWNqcmVzQnFzTWZGVFFiV25XcEE2TGwzUjZMZldOMFRHTWRCbDJYZTNmSXJEbElOU0FCVWJaSy1rR1dFLVpTb19QSXVodnFqVGtoRnVIeUJRZw?oc=5",
+      "published_at": "2026-10-24T22:11:22+00:00",
+      "publisher": "Yahoo Finance",
+      "category": "科技",
       "potentially_material": false,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "SK hynix (KOSE:A000660) Stock Looks Reasonable After Its Huge Run - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxONGM2UDhEdmRjaEtuUkRrckdGUy1hbC1yOUZKU3ROcm1iQWJfU3RLMlQ1QXNRR3NqS01PRDJGbktWM0RyZ29hVkxEWUpIRFZaWXZxcWNjT3U0VVloQTJXSVBaS29RTEo4ZG1rNmdnc3dWLWoxQUNEUHp2NnFXUzFUOTZvRU5xWTQ4UE1idnJmejJoU0p0dFA0?oc=5",
-      "published_at": "2026-10-23T22:13:11+00:00",
+      "title": "Here's How Many Shares of Apple Stock You'd Need for $100 in Yearly Dividends - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPd1dpUXNpTXhaS2JYMU5xVE5VV2djNG9SUmVKZGFsUUZCcTFHZkY3MzVDNWlGSWY4UEZ2ZlZ5LU91SWdYb2p3cm5nNGRiNDFfNmZVNFBjUEIzbVhWYmFhV1ZHSnFNRkNXSmN1Mlo2Qzl4Rk9GQm05WUNBM2pVOGpaelJsUDZwaUVCZ0dkT3ZfZnM0bFd3Nzh6Tlln?oc=5",
+      "published_at": "2026-10-24T21:09:00+00:00",
       "publisher": "Yahoo Finance",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Here's How Many Shares of Apple Stock You'd Need for $100 in Yearly Dividends - The Motley Fool",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQNDJvd3YxZWllT0ZwZUstVkNuVDY2dnlZYXVxUDVDSlN2b29hMUgwOXQ5UXlqQlJIRHNNMkJ0cVRpcDV5RWctdDhZaXhGeEotcDBnVWstY1RybFREQUtoZ0lfX080ZW5TZU45MU9NWWdiWndmbENPbnVtczNkTVBSM0hRM09va25zYW9UR3FhLW56azVhRERpcw?oc=5",
+      "published_at": "2026-10-24T20:55:59+00:00",
+      "publisher": "The Motley Fool",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Tencent Music Entertainment Group Sponsored ADR $TME Stock: Robeco Institutional Asset Management B.V. Raises Stake - MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxQc3FQYlN4NFRpLWVSVzJmdEJQUnY4dXpySThxU2hLeHBYdnA1VWhTaVBxWFB4NV9uWTc3UDZ0RUQ4NUc4ODZta1Fha3U0YlZjUm9oMzg3VmZYWnVORjBGWTJUaU4taUF2Vzh4Q3lVLXFVclAteEtPZXlkQTltV211ZGhYMWZ1c01mcmUwSnpTYldMc3RRSFpmeW85S2pnclJwbHRuaEhOTGhQR2M1eDg1NjFNWnZSVU1oeFd5LWY3Tm9kbmR4bzRiRm1uZ2tyanhCcjgxbEl5SXJyZWdRbG9wMDVzYTVpRHNVSU1YSEhWM0ZqYW43bHZ5VER5c0N0M2Z3OXc?oc=5",
+      "published_at": "2026-10-24T19:43:58+00:00",
+      "publisher": "MarketBeat",
+      "category": "中概",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "SK hynix: Don't Bet On The Slower Boat In A Fast Tide (NASDAQ:SKHY) - Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNMmhMcjhkUERPUFhaX0k4aHdtbXRMaGUxVEVhT1pfV2F5WnhQbEpKLTJxMEJlUEpNQVRhSFIwWFdyVUcxR051alVQMnBoNTh2YkZjTG9ZbUV4Q2lVVzZVUXo0SG00bkoxc2kzN1BVb0Y4UkJZc2doWmJBU2V5YnFCQ21JTmxkN0lXSW5Gb01pbHJJWGpCOXdv?oc=5",
+      "published_at": "2026-10-24T18:56:25+00:00",
+      "publisher": "Seeking Alpha",
       "category": "半导体",
       "potentially_material": false,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Gold's $4,000 support breaks, but is the selloff overdone? - Kitco",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPdHlwU2d3LVl4RlY3dTJCejZMQ1FJM1ctRjdfNzBwTFgwR3VScjZZOUZqOXhoVXlBVDRCd0JpVTVDZ1RPaGtTVEtzY0RHZXk1a21hamtmRFpKM092SnhGR1lCRU1zN0tOQmVPQTJfZnBmRmptbEFQWmNoSjRoNlFhUFAtWlVFXzdic05zVmI5ampCUQ?oc=5",
-      "published_at": "2026-10-23T20:34:18+00:00",
-      "publisher": "Kitco",
+      "title": "Apple Joins Nvidia in the $5 Trillion Club. Here's Which Stock I Think Can Get to $10 Trillion First. - The Motley Fool",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNQnZzVWVvN1ZJT19fTTlZQ1o3M1ZuNmZDcHZ0NGpRR3ZGUjBvNXJESjdFMXQ0OFNkZzdTd0Y4UGlocTdjNmU5VHZUbTBNa0JJa3VZVUZsOXVhMUt4LU1XWjlZUGE3bVM2MVpYMDJyTktvVHcyQmxVRE9KSWR4UGJaTGhBbUt4TEcwc2JzY2JJSQ?oc=5",
+      "published_at": "2026-10-24T18:17:00+00:00",
+      "publisher": "The Motley Fool",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Apple Joins Nvidia in the $5 Trillion Club. Here's Which Stock I Think Can Get to $10 Trillion First. - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxQZ0d5VFJ6bkhkRmZMaThnX044di1tTGFjdkdhWGZYZlhkTHg2djVNaWZQaFFhWmVudDFXcThQLWdacUVLZHl3U29oMHVoeFZmMy1fS25yOXljOC1ObG5FQ3c1VUFUWE1oTlQ2RXRPbXM2b0JvV0NTbmlEZmVsR2tLU2pPMzJscWlzRmszWVdKV3JfcGg2WU9MZU9VQlM2dWtzTVdpZ21FcjQ3VGgtb0plYk5ZZVZFV1QxS2M5V1NmOXRkMkx5dWZ6RW1kWDJWUWVtdV80dG5EZ1Z3S3VIbXB1RHBESVRjLW03YV93S0N6MFZ4dGhrQXFNY3lSSm9VREw5R1k0LXBwdk1jR2p1WEdBak5R?oc=5",
+      "published_at": "2026-10-24T18:04:58+00:00",
+      "publisher": "The Globe and Mail",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Nasdaq, Treasury yields and dollar face a major AI sentiment test - StoneX",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZlpmc3pTTnVwTkp5aS1HMXpISUhTSnBndTNiTWdzMmlkZ21QOUJsRm1CaWtidGtKVWVvV3N2cm5KTnE0NW93X2JfRUtzcjZoR1VVZWp5NzFheUEyOWFRd19vTjBCTUFVdnFaMWhaTXBBOW5rSDBRakQzNXBraTEyVklqajEyUjhaWUFIZXViVWZ3SFpkZmhfQmh1N1NQRXZjVUQyeDZyMGlaemNNdElyNGdB?oc=5",
+      "published_at": "2026-10-24T17:43:55+00:00",
+      "publisher": "StoneX",
       "category": "宏观",
       "potentially_material": false,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "US Equity Markets End Lower as Oil, Treasury Yields Gain Amid Middle East Tensions - Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOZTVDaGZXc1hvb0ZubjJOYWFEU19tVk5waUZqeVg4aXVoQTV0eXJudHhpNXZTZEZadHJaVG8tODJJY3NsSlJYWDc5bm5wOF8yaTVoSEktQVIzVFNXQnRZcFVFZTRndUVmZHYzaExOaHI0Rmd6b3ZLYnFaYW5zR2R4TW1B?oc=5",
-      "published_at": "2026-10-23T20:22:36+00:00",
-      "publisher": "Yahoo! Finance Canada",
+      "title": "Priti Adani pushes for industry-aligned education to boost India's semiconductor ambitions - India's News.Net",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOMXQxWFBRTFNJMEVZS1hWR1FGRThrWVVIMFMxLUhScE9MNjFDSlE4UjRuVU5vUzZCUHNWQ0Vxc0NuVF9aYVJTampwVGVWUnZlZzl2TDRMOUZWb1BHU0VraVJRQnV4SmRmampCQVFmV2N5eHpyZmxJR0x6RmZJR2otR1hmOGRrenZaZmhZUVBxcG9id3o0cWhfTDRqbHdUMkRZZzM0TklwY2tWRXctRDlfbnByanhUWTJKekExdWV3eE84WTUtdlNvOWZn?oc=5",
+      "published_at": "2026-10-24T16:04:00+00:00",
+      "publisher": "India's News.Net",
+      "category": "监管",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Why McDonalds, Microsoft and Google saying no to tokenized stocks isn't a dealbreaker - CoinDesk",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNbm5pWDd4RndldEZ5NU1XRVVESnRLMmdDSUdqU3BDdUx0a29iMEFEMFY1UThtWk5VdDhXd2JMMllwd3h1M0FVZzNNZkM2NmVHUm4wd0FQMk81UDlYZksycnV5N2JIQ1hoYmNsbHlSTURFMkhyc0pSemo2MEt6R2N0amtPenJQWkNZNG1BSUhmbm1MYThvS3ZaNWJsWGtZbmlkOTQtX1Y0RElUYkNwQjlDSWo2MUp4NmJUVU14TWZJaGxpeUZCdzRyWg?oc=5",
+      "published_at": "2026-10-24T15:00:00+00:00",
+      "publisher": "CoinDesk",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Curbing Inflation or Rescuing Trump’s Economy Before the Midterms? - نورنیوز",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNbHlsUEg3S01NbHpKX3BLanMwNmdLdXVZMEJsNmQ1N2U0ME85N3lpS1djbFV5RnNzVjVyRWNuUUNvbXZtYUt0bmc0WUNxLXJLdEJsNEdWc2ppXzh4cGtLNWV1RlhzUTl1X3pvaTBha1NRVW51cFRSNWswVVVhU05fX1FPdXg5d0pRS0FwMGI1OWVyejF3X0pPYy1SVG9Zc1k?oc=5",
+      "published_at": "2026-10-24T14:17:17+00:00",
+      "publisher": "نورنیوز",
+      "category": "宏观",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Prediction: $200 a Month Invested in Nvidia Will Be Worth This Much by 2035 - The Motley Fool",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPQjRKeXR1Y2ZxeVBnS21lRDA2S0t4a18yNHJfdVpwUS1DbC1qZEZ2NUFBdnBVMVk4QldTdlVYZjRNWml0LWNpdTNucFYwbVBnMzBjWjZyYV9DMEp2by1ma0lpNW84RUNwYTBpT0l4VHh3MEZHZlVLcU5ITld0Nzg5RjFQNi13eEZha0Z3M1ByVGx1aEVnRjRF?oc=5",
+      "published_at": "2026-10-24T12:12:00+00:00",
+      "publisher": "The Motley Fool",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Microsoft Stock And 2 Other Best Defensive Stocks - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOWVpjZm1Xekp5NVNiNlVwQzdEVlhMREpvdXlzWUJra255R19LNzhNZGdnQ2xpVnBkSXlGRkpuR0tMT1ZJUVEwOHN0QndXZE5pZGVPUEVFUElfUmxTM1BLbG5fekVXSTFnc1N3aW9mdkpEdEdOR1ltRXlaMGVZQXhWRXBwaUMwekQtaWZpdXhMMWVlVW5xc2ZTTw?oc=5",
+      "published_at": "2026-10-24T12:09:54+00:00",
+      "publisher": "Yahoo Finance",
+      "category": "科技",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Li Auto Inc. (LI) stock price, news, quote and history - Yahoo Finance Australia",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5LRnF2VS1NenlQMHJXUWl0Tl9aLXlQV0Y2SDZCUVlUZ3R2UUd0UjNycVRDcUdhU200NmUzRFpNclNnSFRENTNKNFQtYVVVTEdJOGhwTFdGUFlWek51T2Fr?oc=5",
+      "published_at": "2026-10-24T11:24:08+00:00",
+      "publisher": "Yahoo Finance Australia",
+      "category": "中概",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Gold's Next Big Move? Experts Warn of Market Turmoil as New Copper-Gold Opportunity Emerges - Streetwise Reports",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQaDdRY1dBU3pRRTdQbzBNcUtBS0UtUUZwMTZicjZ6bS1XVTBoS2lWS1JROTVDNlVWY3k0UWctTnExd09zZlJnSlpvMV9Cc2ZCUVQxRlh2ZnU0TlBpSmRpQUo5SGsxM3Q4T2t3Y1hMUzNQWnhOUDg2UTY5N2hUd1FBeE4tUWNMRXExU2ZKb1VHUjQtM2dvRUpMTmRiOEpwNVVvMlV4SmhlY0ZCbWNFUHpHejE4UzFpdzFHbDBCVE43aEdtMG5PYnpBbjdHbklpZnp5cHc2Sm5kUk1jTHNiVTNqVjZvcw?oc=5",
+      "published_at": "2026-10-24T10:29:33+00:00",
+      "publisher": "Streetwise Reports",
+      "category": "宏观",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Micron Q4 Cash Flow Hits $44B as vHBM Hype Builds [2026] - shattered.io",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFB5TWF1NTk4eEVaOEh6Qi0wcDc4REtRelJTU19HRkNZcXlTa3ZsUDlGV2wwS0ZJOUo2WmZvc2RSc1hOSTF3RmhFZ05IeVliOWxUOE5pREt1VGlYZGZ0UGpONG0xUlE4TWFkUUlMcmlwU3hvTXJPSDQyQ1Fn?oc=5",
+      "published_at": "2026-10-24T09:00:08+00:00",
+      "publisher": "shattered.io",
+      "category": "半导体",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Alibaba Group Holding Ltd. ADR underperforms Friday when compared to competitors - MarketWatch",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPSkhFRmxlZGt0a0paQk1PVnBTUnBSSWdNYlBSUjBYaGhYNlBQc0Z0VjNBZUpVXzlINmR3WHpwYUlZTDQ5NmtTaGdBTlB2UE8yYm40cVJrYWRfeFpFaDRoZGwtcFlNQ1IzSFFfWFd3Sk5lSzk4VU1ZWThONWRZTjZiR1A2Ymhnako3cFFSWTdLUkRLRjF5ajd3UlZCOEhGRHNRekdzLVl3Ui1saS1BbmpfcGU2cHJ0eUx5MVNPZlpKOGk4NFd5V2ZHMmU3cFhiWi05a3U2VFh3?oc=5",
+      "published_at": "2026-10-23T21:16:00+00:00",
+      "publisher": "MarketWatch",
+      "category": "中概",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Global Markets Weekly Update - T. Rowe Price",
+      "url": "https://news.google.com/rss/articles/CBMi3wNBVV95cUxOSXJsdmp0SmZTcjNvNzBCMzJHQ3VuNGJTZVdQTkpIRllqSHdjS0tPaEJRelgwQTRyMTNycngtYW5obUtqTFNOSVZOSnR5RWEyNnhNdEF2Q1NLdkVsNnNTVGxXLWhQS1JOUmZMaG1DWGJvdWNJWnJZU2k2LXZsTVVqQXJDd3NVeGxmdzltM0JtZkhoTnhMSHRuWTlWNzFSdXktX2RObFNaSUJwV2Q5bjJFR0Z5a2pFeHY2NUZ6eTloaFdwUDZaNGU1ZzBScG9sMDNibzFGS2wzd2JTRjFXVHl2cmRsa2lGUVV5U2dpWlFManNMc2w2OEF0MzNjcDJJdUZYWHpDaVB0QTdhV0podEppaXZmTEVvdV9CNEgtX19VWWtzSnU2Um03dHFBd1RfbkU5eXdWLVU2ak9YZkYwT3FPNU9aSUJmZDNMX3M0TGxsQV9aZWRGYkVvZGNZa0ZLWGFEamlRdjZQbHFDaWFEYVI3OVlCVVVrc1RCbWRXR1ZzUU1vSXI4SVpYbW9kWmZvUVZ2N01FOXZ3XzZBc0VDRk1tbzZBMENwWV82dm9FaHJCLVMtY2I5YVRaMUJQbnZqQjlmVHRUTm1QNGV0eW1yUlF1cF9MbVk1MnlwSmI4M1ZCMA?oc=5",
+      "published_at": "2026-10-23T21:14:12+00:00",
+      "publisher": "T. Rowe Price",
+      "category": "宏观",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
+      "title": "Update: US Equity Indexes Fall, Treasury Yields Jump as Iran Tensions Send Crude Oil Sharply Higher - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNNWpmM3Y1cWMzQnM0REVNM0JTSHpXenJkbUxsSnBiUVVTZHBHOC1nXzlwS1JuWFpuV1F6Z3I1Nk5VTVRRZ1BsYkdUcUNFT2Vkd3BXczRhUEZ2NWtHUm1QZzJFenZqbVRpczliYmdWMjBqX21MbFF6bzAxS3NReG5XQlNGN24yMW5nMmVOOWtPcl9FT1k?oc=5",
+      "published_at": "2026-10-23T20:29:15+00:00",
+      "publisher": "Yahoo Finance",
       "category": "宏观",
       "potentially_material": false,
       "verified": false,
@@ -2497,91 +2617,11 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Amazon Ranks No. 1 Among Consumer Stocks - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdWxIMDcwZzN3bGhpbkhOVFRSQXhqaDhkZkJjWndPSExTSWdrNTBsb01XRlRsTlNQdW9jMExDTTd2VFlzNTBuQnp5eFlxdklGMmVQaXpPRndkRXRBSzR3YzNvTXhvRHoxV041T1FhaHZPbWgyREJMSEEwYmlLdHhuUFg5Nl9vVDZHYWxBNWFfWnF1UQ?oc=5",
-      "published_at": "2026-10-23T19:23:55+00:00",
-      "publisher": "Yahoo Finance",
-      "category": "科技",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Apple Is Up 28% This Year: Take Profits, or Hold On for the Ride? - 24/7 Wall St.",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQeEQ5T0poQTUyT2FNeG9PVlU0dEhheVhEYnpHSUlkb3M0WWw2LWE2ekY3bWFIbldmNXJja0d0dWRDVnBreTNUczFqV2U3dXBqNnZzczJ0Nlg2MUZsV0xTUFFwWS1yNnhsY3lfdGN4U2dHcHlFcUJBSlo3b2l1VGtaTkVQcUVhcjdvMzljS1U5Y1ZJbW5QR1BOUHg3QkdGaWxNME9rTFFDN04?oc=5",
-      "published_at": "2026-10-23T18:33:00+00:00",
-      "publisher": "24/7 Wall St.",
-      "category": "科技",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Nvidia Stocks Put AI-Factory Downtime in Minerva's Crosshairs - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTmpqeEJBNm5lR0dmak80bHZuTzlaSk9XaDhpWnpjaVhJX1RfNzkzVnRZMzl0S0hTYjhaSUFpejNyaUkweE81WGd4MmVRQVVidFJHZGxTeEM5X2VpX0xjUkJCck9MMDh4eDctU21Kd3Q2b29qR2FLYl96WU42dTJzWFdZdWJCVTZvRnhwcWdGOHNDQVhyZ0k0?oc=5",
-      "published_at": "2026-10-23T18:21:53+00:00",
-      "publisher": "Yahoo Finance",
-      "category": "科技",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Apple Stocks Test $1,999 Foldable Demand as iPhone Duo Arrives - TradingView",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPVG9RSHBLTDd0VWh2Tmp1RFpWZEdMbDNYN2FaUWNLZmJyS0k4Yk1BemxVN1lZcDRCSnZCbURzYTVXenpIbWtHZE5jdmFoRGRYa0NJTlhoTG1YcXBIUUt6SHA0ZS1HcEh6YldZMTAzVG9YWXl1NUlaZkZnVzJ4amR1TGdtT1lsV2hZZTg3c3J1Mmk4MENmVmVwVVNJNkFRcVFydDI2MnUtZFJXVlBIYkVUR25sUmVqd0lIal83WDd3?oc=5",
-      "published_at": "2026-10-23T18:16:59+00:00",
-      "publisher": "TradingView",
-      "category": "科技",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
       "title": "SK Hynix vs. Micron: Wall Street Sees Roughly Equal Upside in the Memory Duopoly - BigGo Finance",
       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5FY05ScDhlMnBYb1cxM29mbjNpUC1IQU5pc3VsMFNQT2dOS0hhblB6ZzdrY1FoMFlyeDVVVHpGbTAyRGRGQUhlcjV5ZnZlZUt4WjFEWEUyMG9KTHJtVlJtWnpUUF90MXlPTFpRN3FLdEw1a2hiaWc?oc=5",
       "published_at": "2026-10-23T18:15:00+00:00",
       "publisher": "BigGo Finance",
       "category": "半导体",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Treasury Yields Rise, Eurozone Bond Yields Fall Amid French Concerns - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNTUhnbkphRWxlVTh6eTd2X2FsM0VLTURQelJYV3dnRzhHTFhhcFRwdWkwQ0t5UVZ6a1BFU194YXdTYlBuQTB4djRCZ0M0ejRqV0VOc0dnOVl4OHdfUG9IUXFfRjNMUmdnQUJuN2ZrRG5NR2p6YVhaVTZ5X0lMM2VMMlo5cHpjNU9BTWtRcU5vTFp1b2tsZmg4bjR0VVhZVlZa?oc=5",
-      "published_at": "2026-10-23T18:11:00+00:00",
-      "publisher": "Yahoo Finance",
-      "category": "宏观",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "The correlation between oil and the markets has turned negative amid the tech selloff – analyst - TradingView",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPRFFqX2FxQ1ltWlJpX3VnclNtMjRlRE0xSmVBUlp2NlREdlpISG9NcXlzQ0RhdFVQcjNiMVlHRkpZOVpBZlJVRkF4MkI5bVJBUnRaMG5SbU1JVmxWbi1hQ2cxTTAtbG9JUmFiV0RoQ2RWbjJBR3Eycjk5SmFiR3BDaW94YzlrU3BvZVYwN082WVp4RjRQdzZ0SklwUXlFWkRrVTVNVnIwQWU2MjlQVnp5QmJyVWdRbHUxOHR1b2tGNHpYMkhiRFN5MmhESDZoRHBLNk9JbHlJWjMyaG1ROUc3M3V4djMwa25BSkdRbw?oc=5",
-      "published_at": "2026-10-23T15:21:27+00:00",
-      "publisher": "TradingView",
-      "category": "宏观",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Micron vs. Texas Instruments: Which Semiconductor Stock Has the Edge? - The Globe and Mail",
-      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxONjVVX0xiRC1tTmNqd040M0tlQmh2T0VxdDRIYnlEZXVQazFOcThGekdxVXVzT09KN19US3dUQXFYakcwR2hVbmtmZWtQeTJKU2JqMnYtT0dSSWVUNWMwV2VLQUxCSWR6cW82U1ZiVlJKdjhQRmJZYmtXS0pxUmw0SHg1Ykw5LTEtcENPcnlDSXdXekpSbzZuR0J1NU15MXpnYzAyLVdNT2F2VXhMemtYNU9UcS1DcG5IM2FEZFA3cHl1aUNzT1pMTlloTENDN05PeWRiS1lvUHN6Q3piZjhjNFlPdw?oc=5",
-      "published_at": "2026-10-23T14:48:00+00:00",
-      "publisher": "The Globe and Mail",
-      "category": "半导体",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "My Nvidia Stock Price Prediction for 2027 Is More Bullish Than You Might Expect - 24/7 Wall St.",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNclZHaEd6blNJMjZ6TTN4UjVDVmJGZERvRXZlcXA2bUhKQ3FfbWI5c0lkeW1lREU0RVB4SGRtRHktZFlCaEJNYU1oVzFGTjJGempjSkhPaDNCY01kMUhMMnJuSnVya1J3d2hOTTVnZGl2VHRqRXpuWnRUWkZpVk0xSWQ4MkVfRERaVmVTYWYwTTFyZGk5VzhPd2JEVDdyQ3JSc0NXQWJlQTFCanU1b2ZiVWUtVjNOa2R1OHdkd2ZFU2E?oc=5",
-      "published_at": "2026-10-23T14:30:00+00:00",
-      "publisher": "24/7 Wall St.",
-      "category": "科技",
       "potentially_material": false,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
@@ -2617,26 +2657,6 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
-      "title": "Should You Buy Amazon Stock Before Oct. 29? - The Motley Fool",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPMVdEY3ViSjN0NGYtVjdrMHlkZ21sVGNiU085VGdnd08zU21CU21PSlJhVEgwRWQ1dldaWk43R0dHREpWNU5CMGUxd0xxQTR5OTBhOGpZRXhXVExCQWFxY1ZQWGtVbjN3Y3R0V255NFdEZWl0X0FHb2tYWTV6M1pDMXlfT1NhWFQyVXl4dg?oc=5",
-      "published_at": "2026-10-23T12:02:00+00:00",
-      "publisher": "The Motley Fool",
-      "category": "科技",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Treasury yields log biggest drop since the 2023 banking crisis. Here’s what’s going on. - MarketWatch",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOdDNHQlIxQkRfeVl2bWtrX2lzYTZsX0JYazZRaGdkclU5aHAwWlppV05YSTdvS0kwQXNVa0p6N0tseXVpcDZPRFBhdV9fbTExaXZZSTJJT1RXQmVXR3ZpTE5aZXp5cXFHRnB0WGxJNjVubU14LUs0eFV0SDVHWnJpYVkwYlNxZEhvZDVPa1U1MXlsYi15a2czRGJiOER5RjQ5M0toakZZbWV5S245WkM3QVNhZw?oc=5",
-      "published_at": "2026-10-23T11:01:00+00:00",
-      "publisher": "MarketWatch",
-      "category": "宏观",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
       "title": "Nvidia’s China Market Has Effectively Vanished: ‘Every Restriction Also Gives Chinese Suppliers a Larger - Benzinga",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQLVB1cEhqVEktM2hKVTI4RXpMSE1hN2ZkWkRTOUc5NHQ3N2JOMHJGaDN3SFJZb0tIWUI5RnVfb1V3TFZuU1dHdDlmd3RkWVdENHNrRlBDMWZET1JEN0hsTmlDSkdqdm9vUkZZNmtkbUUwamZ1UWdBbldQWkdVNUFENlE4RnlrbEh6TzVkQlE4U0dGa0I2bUtj?oc=5",
       "published_at": "2026-10-23T11:00:19+00:00",
@@ -2657,41 +2677,21 @@
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
     },
     {
+      "title": "Trump administration reportedly halts programme rewarding allies for export-control alignment - Business Upturn",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQcFRqdzRKa012b25MQklNcEtYbi1UUVlTNVV0V05RLVdkYndLVW9nVXE5R05nb1B6czJQcDNwT1NLNlFJUHdqN0hmMDZDZ1hDb2UzdUIzeTBSTVpPYWVoUVBwbGV4a3hIOFp3WXlzaVhHOUJuTVZlSlhveEtUOW5NeExVaUJJS0ljWmFtVThKMHZWenA3QmlRclhuMGJGZVpPVmM1SzRobXI5bTF2UkxiNjJYNk84UWp4OWNZVG1NaFFOTXJYbXhHUDFFYlctemc?oc=5",
+      "published_at": "2026-10-23T10:07:00+00:00",
+      "publisher": "Business Upturn",
+      "category": "监管",
+      "potentially_material": false,
+      "verified": false,
+      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
+    },
+    {
       "title": "10-year Treasury yield drops back to 5% this week as investors seek cover from AI worries - CNBC",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9fUFhkR0R0cmxYeWNRb2Y2LXEyNUlGQnozcWxNUW1jaWRDcUdpYnBTWVZGR3p4OWwydEdicWRMMEozdXpxUl9td1V6SVVZM2JOT25hOWU3TUFLU1h4aHk0VC1VcjQ2bkhyMGJSVzduZ9IBdEFVX3lxTE1KUjZzM3JxQnUxN2Y0LVlocU52STl2ZUIwSlNOMFNnY3hyUlJ5TGJpZjJlc3VRaS1LdDh1ZlNvSDNCYWlmdnpIMHk4ZWFTT1E3UmplVjAwRm5MNnM5V2FsSWVpZ0Z3aWVhMjNVeWhrX1lRWWtk?oc=5",
       "published_at": "2026-10-23T09:11:42+00:00",
       "publisher": "CNBC",
       "category": "宏观",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "HK Stocks in Motion | Xiaomi Group-W (01810) Rises Over 5%, Temporarily Leading Blue-Chip Gains; Integration of \"Human-Car-Home\" Ecosystem Strengthens Product Differentiation - Moomoo",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOX0tMWFNpQ2pEQlI3NjRpVXZfUTdFNUtQV1RCT0RsNHNUY2xCMjlYVUdPRkRacVBzN1BjYko0MTlCWHVxdXluVmoxMG4xV2NjaEp1RC1ZOV83aEphWW8wdEtId0N2M25jTXQtdVctUEtQRDFHdTdsTU9QV3hfZ1QtekZQSHB0QnJ6eUZuWGxIWDZrbDFOUzJURTZ5OA?oc=5",
-      "published_at": "2026-10-23T04:09:46+00:00",
-      "publisher": "Moomoo",
-      "category": "中概",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "SK Hynix shares jump over 4% after early losses as chipmaker scraps Solidigm IPO plans - CNBC",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1KdzNWdWhnSURIVm1od1FoWG5sa05neWxtbHp3T1Myd19NNS13R0ZxdFJ4SWhFYkdWa0hJN0QxSnhKd05NUmlNYVB1bUtrUlVlT1BYeXYtd0cwRVl3MmpIVUo5aFpXVVhqUVdJ0gFwQVVfeXFMTnpSVllodEFiTU9IZThoRkY0ODVOYWo2Z3B6Y3gzaFJtdmJjR2E1anUyWnZMNFprOVBLYUI1U0R3T1oyVExleGliU09VVzZlT2huRTVSZWwzRU4tQmhNTjJRVzQ2OF9MUVBaUmRBdDFSdQ?oc=5",
-      "published_at": "2026-10-23T00:53:00+00:00",
-      "publisher": "CNBC",
-      "category": "半导体",
-      "potentially_material": false,
-      "verified": false,
-      "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
-    },
-    {
-      "title": "Behind Samsung and SK Hynix's Strong Results, a Warning: \"China Is Coming for HBM, and It Has the War Chest for a Chicken Game\" - BigGo Finance",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5JRmhmZ1VTV3cxdTE1WF80X0tDOURySU9FUDcydmlCYWY5c3VabGE1R3N1TmFXSS1HQWdZVEFRMWk2MURDM05QYnhfYmxrREwxWEtWTlRxeERrR29VTjBpa2p3VW9yYjI1cXhRdVVCekhLdmF1ZXc?oc=5",
-      "published_at": "2026-10-22T22:55:00+00:00",
-      "publisher": "BigGo Finance",
-      "category": "监管",
       "potentially_material": false,
       "verified": false,
       "note": "RSS新闻标题，事件重要性由关键词粗筛；未经独立核实"
